@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Syntia — Asisten AI Suara untuk UMKM Indonesia</title>
+<meta name="description" content="Syntia adalah asisten AI berbasis suara dari PT Syntegra. Kelola email, jadwal, tugas, dan catatan bisnis Anda lewat perintah suara dalam Bahasa Indonesia & English." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#2563eb;
+    --purple:#9333ea;
+    --fuchsia:#db27f6;
+    --ink:#0f172a;
+    --slate:#475569;
+    --muted:#64748b;
+    --line:#e2e8f0;
+    --bg-soft:#f8fafc;
+    --grad:linear-gradient(135deg,#2563eb 0%,#9333ea 50%,#db27f6 100%);
+    --grad-r:linear-gradient(to right,#2563eb,#9333ea,#db27f6);
+    --grad-soft:linear-gradient(135deg,#eff6ff 0%,#f5f3ff 100%);
+    --shadow:0 10px 30px -12px rgba(37,99,235,.18);
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%}
+  .container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .section{padding:90px 0}
+  .eyebrow{display:inline-block;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+  .section-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+  .section-sub{color:var(--muted);font-size:1.05rem;max-width:640px;margin:16px auto 0}
+  .center{text-align:center}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.98rem;padding:13px 26px;border-radius:12px;cursor:pointer;border:none;transition:transform .15s ease,box-shadow .2s ease}
+  .btn-primary{background:var(--grad-r);color:#fff;box-shadow:0 8px 22px -8px rgba(147,51,234,.6)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(147,51,234,.65)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
+
+  /* Navbar */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem}
+  .logo{width:36px;height:36px;border-radius:10px;background:var(--grad);display:grid;place-items:center;color:#fff;font-weight:900}
+  .nav-links{display:flex;gap:30px;list-style:none}
+  .nav-links a{color:var(--slate);font-weight:500;font-size:.95rem;transition:color .15s}
+  .nav-links a:hover{color:var(--purple)}
+  .nav-cta{display:flex;gap:12px;align-items:center}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:1.6rem;color:var(--ink)}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:var(--grad-soft);padding:90px 0 80px}
+  .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;z-index:0}
+  .hero::before{width:420px;height:420px;background:#bfdbfe;top:-120px;right:-80px}
+  .hero::after{width:380px;height:380px;background:#e9d5ff;bottom:-140px;left:-100px}
+  .hero .container{position:relative;z-index:1;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--purple);box-shadow:var(--shadow);margin-bottom:28px}
+  .badge .dot{width:8px;height:8px;border-radius:50%;background:var(--grad)}
+  .hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:900;line-height:1.08;letter-spacing:-.03em}
+  .hero p.lead{font-size:1.15rem;color:var(--slate);max-width:680px;margin:24px auto 36px}
+  .hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .hero-note{margin-top:18px;font-size:.9rem;color:var(--muted)}
+
+  /* Stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:64px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 18px;text-align:center;box-shadow:var(--shadow)}
+  .stat .num{font-size:2.1rem;font-weight:800;line-height:1}
+  .stat .label{color:var(--muted);font-size:.92rem;margin-top:8px}
+
+  /* Feature/Service grids */
+  .grid{display:grid;gap:24px;margin-top:54px}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s;text-align:left}
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(37,99,235,.3);border-color:transparent}
+  .icon{width:54px;height:54px;border-radius:14px;background:var(--grad-soft);display:grid;place-items:center;font-size:1.5rem;margin-bottom:18px}
+  .card h3{font-size:1.15rem;font-weight:700;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.95rem}
+
+  .alt-bg{background:var(--bg-soft)}
+
+  /* Pricing */
+  .pricing{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:54px;max-width:840px;margin-left:auto;margin-right:auto}
+  .plan{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:36px 30px;text-align:left;position:relative;transition:transform .2s,box-shadow .2s}
+  .plan:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(37,99,235,.3)}
+  .plan.featured{border-color:transparent;background:var(--grad);color:#fff;box-shadow:0 20px 45px -18px rgba(147,51,234,.55)}
+  .plan .tag{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.22);color:#fff;font-size:.72rem;font-weight:700;padding:5px 12px;border-radius:999px;letter-spacing:.04em}
+  .plan h3{font-size:1.3rem;font-weight:800;margin-bottom:8px}
+  .plan .price{font-size:2.4rem;font-weight:900;line-height:1;margin:14px 0 4px}
+  .plan .price span{font-size:1rem;font-weight:600;opacity:.7}
+  .plan .credits{font-size:.95rem;margin-bottom:22px;color:var(--muted)}
+  .plan.featured .credits{color:rgba(255,255,255,.85)}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
+  .plan li{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;color:var(--slate)}
+  .plan.featured li{color:rgba(255,255,255,.92)}
+  .plan li .ck{color:var(--purple);font-weight:900;flex-shrink:0}
+  .plan.featured li .ck{color:#fff}
+  .plan .btn{width:100%;justify-content:center}
+  .plan.featured .btn-primary{background:#fff;color:var(--purple);box-shadow:none}
+
+  /* Top-up */
+  .topup{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;max-width:840px;margin-left:auto;margin-right:auto}
+  .topup .tu{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
+  .topup .tu .amt{font-size:1.5rem;font-weight:800}
+  .topup .tu .c{color:var(--muted);font-size:.9rem;margin-top:6px}
+
+  /* Persona */
+  .persona{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:54px}
+
+  /* FAQ */
+  .faq{max-width:780px;margin:48px auto 0}
+  .faq-item{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;background:none;border:none;text-align:left;padding:20px 24px;cursor:pointer;font-weight:600;font-size:1.02rem;color:var(--ink)}
+  .faq-q .chev{transition:transform .25s;color:var(--purple);font-size:1.3rem;flex-shrink:0}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);padding:0 24px}
+  .faq-item.open .faq-a{max-height:260px;padding-bottom:20px}
+  .faq-item.open .chev{transform:rotate(45deg)}
+
+  /* CTA */
+  .cta{background:var(--grad);border-radius:28px;padding:64px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .cta h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}
+  .cta p{max-width:560px;margin:16px auto 30px;opacity:.92;font-size:1.08rem}
+  .cta .btn-white{background:#fff;color:var(--purple)}
+  .cta .btn-white:hover{transform:translateY(-2px)}
+
+  /* Footer */
+  footer{background:var(--ink);color:#cbd5e1;padding:64px 0 28px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+  .foot-brand .brand{color:#fff;margin-bottom:16px}
+  .foot-brand p{color:#94a3b8;font-size:.95rem;max-width:280px}
+  .foot-col h5{color:#fff;font-weight:700;font-size:1rem;margin-bottom:18px}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .foot-col a{color:#94a3b8;font-size:.93rem;transition:color .15s}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid #1e293b;margin-top:48px;padding-top:24px;text-align:center;color:#64748b;font-size:.9rem}
+
+  @media(max-width:900px){
+    .grid-4{grid-template-columns:repeat(2,1fr)}
+    .grid-3{grid-template-columns:repeat(2,1fr)}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .persona{grid-template-columns:1fr}
+    .pricing{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:640px){
+    .nav-links,.nav-cta .btn-ghost{display:none}
+    .menu-btn{display:block}
+    .grid-4,.grid-3,.stats,.topup{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr}
+    .section{padding:64px 0}
+    .cta{padding:48px 24px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <div class="container nav">
+    <a href="#beranda" class="brand"><span class="logo">S</span> Syntia <span style="color:var(--muted);font-weight:500">by Syntegra</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#fitur">Fitur</a></li>
+        <li><a href="#untuk-siapa">Untuk Siapa</a></li>
+        <li><a href="#harga">Harga</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#harga" class="btn btn-primary">Coba Gratis</a>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="container">
+    <span class="badge"><span class="dot"></span> Closed Beta · Peluncuran Publik Q3/Q4 2026</span>
+    <h1>Asisten AI Suara untuk<br /><span class="grad-text">UMKM Indonesia</span></h1>
+    <p class="lead">Syntia membantu pengusaha dan profesional bilingual mengelola email, jadwal, tugas, dan catatan bisnis—cukup lewat suara, dalam Bahasa Indonesia maupun English.</p>
+    <div class="hero-actions">
+      <a href="#harga" class="btn btn-primary">Mulai Uji Coba 14 Hari →</a>
+      <a href="#fitur" class="btn btn-ghost">Lihat Fitur</a>
+    </div>
+    <p class="hero-note">Tanpa kartu kredit · Suara berkualitas native speaker</p>
+
+    <div class="stats">
+      <div class="stat"><div class="num grad-text">2</div><div class="label">Bahasa: ID & EN</div></div>
+      <div class="stat"><div class="num grad-text">10+</div><div class="label">Fitur Produktivitas</div></div>
+      <div class="stat"><div class="num grad-text">14</div><div class="label">Hari Gratis</div></div>
+      <div class="stat"><div class="num grad-text">24/7</div><div class="label">Selalu Siap</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR -->
+<section class="section" id="fitur">
+  <div class="container center">
+    <span class="eyebrow">Fitur Utama</span>
+    <h2 class="section-title">Satu Asisten untuk <span class="grad-text">Seluruh Hari Kerja Anda</span></h2>
+    <p class="section-sub">Dari membaca email hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami.</p>
+
+    <div class="grid grid-3">
+      <div class="card"><div class="icon">🎙️</div><h3>Percakapan Suara</h3><p>Bicara natural dalam Bahasa Indonesia atau English dengan kualitas suara setara native speaker.</p></div>
+      <div class="card"><div class="icon">✉️</div><h3>Kelola Email</h3><p>Membaca, merangkum, dan mengirim email Anda hanya dengan perintah suara.</p></div>
+      <div class="card"><div class="icon">📅</div><h3>Integrasi Kalender</h3><p>Atur jadwal dan buat janji temu tanpa perlu membuka aplikasi.</p></div>
+      <div class="card"><div class="icon">✅</div><h3>Tugas & Pengingat</h3><p>Lacak tugas dengan tenggat waktu agar tak ada yang terlewat.</p></div>
+      <div class="card"><div class="icon">📝</div><h3>Rekam & Rangkum Rapat</h3><p>Rekam rapat dan dapatkan ringkasan otomatis seketika.</p></div>
+      <div class="card"><div class="icon">🔊</div><h3>Voice Notes</h3><p>Simpan dan temukan kembali catatan suara kapan saja Anda butuhkan.</p></div>
+      <div class="card"><div class="icon">🌅</div><h3>Briefing Pagi</h3><p>Ringkasan agenda dan prioritas Anda otomatis terkirim setiap pukul 9 pagi.</p></div>
+      <div class="card"><div class="icon">🌙</div><h3>Jurnal Malam</h3><p>Catatan refleksi harian lengkap dengan rangkuman mingguan.</p></div>
+      <div class="card"><div class="icon">🌐</div><h3>Terjemahan Instan</h3><p>Terjemahkan antar bahasa secara langsung di tengah percakapan.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- UNTUK SIAPA -->
+<section class="section alt-bg" id="untuk-siapa">
+  <div class="container center">
+    <span class="eyebrow">Untuk Siapa</span>
+    <h2 class="section-title">Dibuat untuk Cara Kerja <span class="grad-text">Orang Indonesia</span></h2>
+    <p class="section-sub">Syntia hadir untuk mereka yang ingin bekerja lebih cepat tanpa repot mengetik.</p>
+
+    <div class="persona">
+      <div class="card"><div class="icon">🏪</div><h3>Pemilik UMKM</h3><p>Urus administrasi dan komunikasi bisnis harian tanpa harus duduk lama di depan layar.</p></div>
+      <div class="card"><div class="icon">💼</div><h3>Profesional Bilingual</h3><p>Berpindah mulus antara Bahasa Indonesia dan English sepanjang hari kerja Anda.</p></div>
+      <div class="card"><div class="icon">🗣️</div><h3>Pecinta Suara</h3><p>Untuk Anda yang lebih suka berbicara daripada mengetik untuk menyelesaikan tugas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section class="section" id="keunggulan">
+  <div class="container center">
+    <span class="eyebrow">Kenapa Syntia</span>
+    <h2 class="section-title">Suara Indonesia yang <span class="grad-text">Benar-Benar Terasa Lokal</span></h2>
+    <p class="section-sub">Berbeda dari asisten AI global, Syntia memahami konteks budaya dan berbicara Bahasa Indonesia secara alami.</p>
+
+    <div class="grid grid-4">
+      <div class="card"><div class="icon">🇮🇩</div><h3>Suara Native ID</h3><p>Kualitas Bahasa Indonesia yang otentik, bukan terjemahan kaku.</p></div>
+      <div class="card"><div class="icon">🧠</div><h3>Memori CRM</h3><p>Mengingat konteks lintas percakapan agar Anda tak perlu mengulang.</p></div>
+      <div class="card"><div class="icon">⚡</div><h3>Hands-Free</h3><p>Selesaikan pekerjaan sambil menyetir, memasak, atau melayani pelanggan.</p></div>
+      <div class="card"><div class="icon">🔒</div><h3>Privasi Terjaga</h3><p>Data percakapan Anda diperlakukan dengan standar keamanan ketat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HARGA -->
+<section class="section alt-bg" id="harga">
+  <div class="container center">
+    <span class="eyebrow">Harga</span>
+    <h2 class="section-title">Pilih Paket yang <span class="grad-text">Sesuai Kebutuhan</span></h2>
+    <p class="section-sub">Mulai gratis 14 hari tanpa kartu kredit. Tambah kredit kapan saja saat Anda butuh.</p>
+
+    <div class="pricing">
+      <div class="plan">
+        <h3>Basic</h3>
+        <div class="price">Rp149.000<span>/bulan</span></div>
+        <div class="credits">750 kredit per bulan</div>
+        <ul>
+          <li><span class="ck">✓</span> Semua fitur inti suara</li>
+          <li><span class="ck">✓</span> Email, kalender & tugas</li>
+          <li><span class="ck">✓</span> Briefing pagi & jurnal malam</li>
+          <li><span class="ck">✓</span> Dwibahasa ID & EN</li>
+        </ul>
+        <a href="#kontak" class="btn btn-ghost">Pilih Basic</a>
+      </div>
+      <div class="plan featured">
+        <span class="tag">PALING POPULER</span>
+        <h3>Pro</h3>
+        <div class="price">Rp449.000<span>/bulan</span></div>
+        <div class="credits">3.000 kredit per bulan</div>
+        <ul>
+          <li><span class="ck">✓</span> Semua fitur paket Basic</li>
+          <li><span class="ck">✓</span> Fitur kustom sesuai kebutuhan</li>
+          <li><span class="ck">✓</span> Rekam & rangkum rapat tanpa batas</li>
+          <li><span class="ck">✓</span> Prioritas dukungan</li>
+        </ul>
+        <a href="#kontak" class="btn btn-primary">Pilih Pro</a>
+      </div>
+    </div>
+
+    <p class="section-sub" style="margin-top:48px">Butuh kredit tambahan? Top-up kapan saja.</p>
+    <div class="topup">
+      <div class="tu"><div class="amt grad-text">Rp49.000</div><div class="c">Paket kredit kecil</div></div>
+      <div class="tu"><div class="amt grad-text">Rp99.000</div><div class="c">Paket kredit menengah</div></div>
+      <div class="tu"><div class="amt grad-text">Rp199.000</div><div class="c">Paket kredit besar</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container center">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="section-title">Pertanyaan yang <span class="grad-text">Sering Diajukan</span></h2>
+    <p class="section-sub">Temukan jawaban untuk pertanyaan umum tentang Syntia.</p>
+
+    <div class="faq">
+      <div class="faq-item"><button class="faq-q">Apa itu Syntia?<span class="chev">+</span></button><div class="faq-a"><p>Syntia adalah asisten AI berbasis suara dari PT Syntegra, dirancang khusus untuk UMKM dan profesional bilingual Indonesia agar dapat mengelola tugas bisnis lewat perintah suara.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Bahasa apa saja yang didukung?<span class="chev">+</span></button><div class="faq-a"><p>Syntia mendukung Bahasa Indonesia dan English dengan kualitas suara setara native speaker, dan bisa berpindah bahasa di tengah percakapan.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Apakah ada uji coba gratis?<span class="chev">+</span></button><div class="faq-a"><p>Ya. Anda bisa mencoba Syntia gratis selama 14 hari tanpa perlu memasukkan kartu kredit.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Bagaimana sistem kreditnya?<span class="chev">+</span></button><div class="faq-a"><p>Paket Basic memberi 750 kredit/bulan dan Pro 3.000 kredit/bulan. Jika kurang, Anda dapat menambah kredit lewat top-up mulai Rp49.000 hingga Rp199.000.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Kapan Syntia tersedia untuk umum?<span class="chev">+</span></button><div class="faq-a"><p>Saat ini Syntia berada dalam tahap closed beta. Peluncuran publik ditargetkan pada Q3/Q4 2026.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="padding-top:30px" id="kontak">
+  <div class="container">
+    <div class="cta">
+      <h2>Siap Bekerja Lebih Cepat dengan Suara?</h2>
+      <p>Coba Syntia gratis selama 14 hari. Tanpa kartu kredit, tanpa ribet—cukup bicara.</p>
+      <a href="#" class="btn btn-white">Mulai Uji Coba Gratis →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand"><span class="logo">S</span> Syntia by Syntegra</div>
+        <p>Asisten AI suara untuk UMKM Indonesia. Sebuah produk dari PT Syntegra.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Produk</h5>
+        <ul><li><a href="#fitur">Fitur</a></li><li><a href="#harga">Harga</a></li><li><a href="#untuk-siapa">Untuk Siapa</a></li><li><a href="#faq">FAQ</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Perusahaan</h5>
+        <ul><li><a href="#">Tentang</a></li><li><a href="#">Blog</a></li><li><a href="#kontak">Kontak</a></li></ul>
+      </div>
+      <div class="foot-col">
+        <h5>Legal</h5>
+        <ul><li><a href="#">Kebijakan Privasi</a></li><li><a href="#">Syarat Layanan</a></li><li><a href="#">Cookie</a></li></ul>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2026 PT Syntegra. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+  // Mobile menu toggle
+  document.querySelector('.menu-btn').addEventListener('click', function(){
+    var nav = document.querySelector('.nav-links');
+    var visible = nav.style.display === 'flex';
+    nav.style.display = visible ? 'none' : 'flex';
+    nav.style.position='absolute'; nav.style.flexDirection='column';
+    nav.style.top='70px'; nav.style.left='0'; nav.style.right='0';
+    nav.style.background='#fff'; nav.style.padding='20px'; nav.style.borderBottom='1px solid var(--line)';
+  });
+</script>
+</body>
+</html>
