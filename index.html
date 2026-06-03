@@ -143,6 +143,10 @@
   .plan h3{font-size:1.6rem;font-weight:800;margin-bottom:2px}
   .plan .price{font-size:2.6rem;font-weight:900;line-height:1;margin:8px 0 0}
   .plan .price .cur{font-size:1.05rem;font-weight:700;margin-right:5px}
+  .plan .price-old{font-size:1.1rem;font-weight:700;color:var(--muted);text-decoration:line-through;text-decoration-color:#ef4444;text-decoration-thickness:2px;margin-bottom:2px}
+  .plan.featured .price-old{color:rgba(255,255,255,.72)}
+  .plan .promo{display:inline-block;margin-top:10px;font-size:.7rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:#fee2e2;color:#dc2626;padding:4px 11px;border-radius:999px}
+  .plan.featured .promo{background:rgba(255,255,255,.95);color:#dc2626}
   .plan .per{font-size:.98rem;color:var(--muted);margin-top:6px}
   .plan.featured .per{color:rgba(255,255,255,.8)}
   .plan .credits{font-size:1rem;margin-top:20px;color:var(--muted)}
@@ -417,8 +421,10 @@
         <div class="plan-head">
         <span class="plabel" data-i18n="plan_basic_label">Untuk Individu</span>
         <h3 data-i18n="plan_basic_name">Basic</h3>
+        <div class="price-old">Rp288.000</div>
         <div class="price"><span class="cur">Rp</span>149.000</div>
         <div class="per" data-i18n="per">/bulan</div>
+        <span class="promo" data-i18n="promo">Promo Launching</span>
         <div class="credits"><b>500</b> 💎 <span data-i18n="kredit">kredit/bulan</span></div>
         <div class="pdiv"></div>
         <a href="#kontak" class="btn btn-dark" data-i18n="trial_btn">Mulai trial gratis</a>
@@ -441,8 +447,10 @@
         <div class="plan-head">
         <span class="plabel" data-i18n="plan_pro_label">Paling Populer ⭐</span>
         <h3 data-i18n="plan_pro_name">Professional</h3>
+        <div class="price-old">Rp688.000</div>
         <div class="price"><span class="cur">Rp</span>349.000</div>
         <div class="per" data-i18n="per">/bulan</div>
+        <span class="promo" data-i18n="promo">Promo Launching</span>
         <div class="credits"><b>1.500</b> 💎 <span data-i18n="kredit">kredit/bulan</span></div>
         <div class="pdiv"></div>
         <a href="#kontak" class="btn btn-white" data-i18n="trial_btn">Mulai trial gratis</a>
@@ -564,7 +572,7 @@
       harga_title:"Pilih Paket yang <span class=\"grad-text\">Sesuai Kebutuhan</span>",
       harga_sub:"Mulai gratis 14 hari dengan kartu kredit. Tambah kredit kapan saja saat Anda butuh.",
       plan_basic_label:"Untuk Individu", plan_basic_name:"Basic",
-      per:"/bulan", kredit:"kredit/bulan", trial_btn:"Mulai trial gratis",
+      per:"/bulan", kredit:"kredit/bulan", trial_btn:"Mulai trial gratis", promo:"Promo Launching",
       b1:"💬 Chat teks dengan Syntia", b2:"📅 Manajemen Kalender Google", b3:"🌅 Briefing pagi setiap hari",
       b4:"🌙 Refleksi malam + rangkuman mingguan", b5:"🔮 Horoskop &amp; shio harian", b6:"📰 Pemantauan berita (watchlist topik)",
       b7:"📄 Analisis dokumen (PDF, Word, Excel)", b8:"🖼️ Analisis gambar + 🎨 generasi gambar AI", b9:"🌐 Pencarian web &amp; berita",
@@ -642,7 +650,7 @@
       harga_title:"Choose the Plan That <span class=\"grad-text\">Fits You</span>",
       harga_sub:"Start free for 14 days with a credit card. Top up credits anytime you need.",
       plan_basic_label:"For Individuals", plan_basic_name:"Basic",
-      per:"/month", kredit:"credits/month", trial_btn:"Start free trial",
+      per:"/month", kredit:"credits/month", trial_btn:"Start free trial", promo:"Launch Promo",
       b1:"💬 Text chat with Syntia", b2:"📅 Google Calendar management", b3:"🌅 Daily morning briefing",
       b4:"🌙 Evening reflection + weekly summary", b5:"🔮 Daily horoscope &amp; zodiac", b6:"📰 News monitoring (topic watchlist)",
       b7:"📄 Document analysis (PDF, Word, Excel)", b8:"🖼️ Image analysis + 🎨 AI image generation", b9:"🌐 Web &amp; news search",
