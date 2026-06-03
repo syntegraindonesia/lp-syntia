@@ -109,6 +109,10 @@
   .hero-features{display:flex;gap:34px;margin-top:46px;flex-wrap:wrap}
   .hf{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:.86rem;font-weight:500;color:rgba(255,255,255,.92);text-align:center}
   .hf-ic{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:1.25rem}
+  .hero-photo-m{display:none;position:relative;width:100%;max-width:380px;aspect-ratio:3/4;border-radius:18px;overflow:hidden;margin:12px 0 26px;box-shadow:0 24px 50px -20px rgba(0,0,0,.55)}
+  .hero-photo-m img{width:100%;height:100%;object-fit:cover;object-position:90% center;transform:scale(1.32);transform-origin:90% 60%;display:block}
+  .hero-photo-m::after{content:"";position:absolute;inset:0 0 auto 0;height:46%;background:linear-gradient(to bottom,rgba(13,30,80,.62),rgba(13,30,80,0));z-index:1;pointer-events:none}
+  .photo-feats{display:none}
 
   /* Logo strip (marquee) */
   .logos{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);overflow:hidden}
@@ -226,23 +230,32 @@
     .grid-4{grid-template-columns:repeat(2,1fr)}
     .grid-3{grid-template-columns:repeat(2,1fr)}
     .persona{grid-template-columns:1fr}
-    .hero{min-height:100vh;align-items:flex-start;padding-top:120px}
-    .hero-bg-wrap img{object-position:72% 26%;transform:none}
-    .hero-bg-wrap::before{background:linear-gradient(to bottom,rgba(17,37,105,.92) 0%,rgba(17,37,105,.74) 46%,rgba(17,37,105,.5) 100%)}
-    .hero-copy{max-width:none}
+    .hero{min-height:auto;align-items:center;padding:104px 0 60px;background:var(--hero-grad)}
+    .hero-bg-wrap{display:none}
+    .hero-copy{max-width:none;text-align:left}
+    .hero-photo-m{display:block}
+    .hero-copy > .hero-features{display:none}
+    .photo-feats{display:grid;grid-template-columns:1fr 1fr;gap:9px 12px;position:absolute;top:14px;left:14px;right:14px;z-index:2}
+    .photo-feats .hf{flex-direction:row;align-items:center;gap:8px;font-size:.74rem;color:#fff;text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+    .photo-feats .hf-ic{width:30px;height:30px;font-size:.85rem;background:rgba(255,255,255,.16)}
   }
   @media(max-width:640px){
     .nav-links,.nav-cta .login{display:none}
-    .menu-btn{display:block}
+    .menu-btn{display:block;font-size:1.4rem}
     .grid-4,.grid-3,.topup{grid-template-columns:1fr}
     .section{padding:64px 0}
     .cta{padding:48px 24px}
+    .brand-logo{height:30px}
+    .nav-cta{gap:8px}
+    .icon-btn{min-width:32px;height:32px;padding:0 7px;font-size:.72rem;border-radius:8px}
+    .nav-cta .btn-white{padding:8px 13px;font-size:.82rem}
+    .badge{font-size:.66rem;padding:6px 12px;letter-spacing:.01em;white-space:nowrap;margin-bottom:18px}
     .hero h1{font-size:2.2rem}
-    .hero p.lead{font-size:1.05rem}
+    .hero p.lead{font-size:1.05rem;margin:18px auto 6px}
     .hero-actions{flex-direction:column;align-items:stretch}
     .hero-actions .btn{width:100%;justify-content:center}
-    .hero-features{gap:18px 22px;margin-top:34px;justify-content:flex-start}
-    .hf{flex:0 0 calc(50% - 11px);flex-direction:row;justify-content:flex-start;gap:10px}
+    .hero-features{gap:18px 22px;margin-top:34px}
+    .hf{flex:0 0 calc(50% - 11px);flex-direction:row;justify-content:flex-start;gap:10px;text-align:left}
     .hf-ic{width:40px;height:40px;font-size:1.05rem}
   }
 </style>
@@ -282,6 +295,15 @@
       <span class="badge" data-i18n="hero_badge">Asisten Virtual Syntia untuk Profesional Modern</span>
       <h1 data-i18n="hero_h1">Syntia,<br />Asisten Pintar yang Urus Semuanya untuk Anda</h1>
       <p class="lead" data-i18n="hero_lead">Performa puncak 24/7, tanpa drama, tanpa jeda. Fokus pada visi Anda dan biarkan Syntia bekerja.</p>
+      <div class="hero-photo-m">
+        <img src="hero.png" alt="Asisten AI Syntia" />
+        <div class="photo-feats">
+          <div class="hf"><span class="hf-ic">⏱️</span> <span data-i18n="hf_1">Hemat Waktu</span></div>
+          <div class="hf"><span class="hf-ic">📊</span> <span data-i18n="hf_2">Lebih Produktif</span></div>
+          <div class="hf"><span class="hf-ic">🎯</span> <span data-i18n="hf_3">24/7 Siap Membantu</span></div>
+          <div class="hf"><span class="hf-ic">🛡️</span> <span data-i18n="hf_4">Aman &amp; Terpercaya</span></div>
+        </div>
+      </div>
       <div class="hero-actions">
         <a href="#harga" class="btn btn-white" data-i18n="hero_cta">Coba Gratis 14 Hari</a>
         <a href="#" class="btn btn-outline-white"><span class="play">▶</span> <span data-i18n="hero_demo">Lihat Demo</span></a>
