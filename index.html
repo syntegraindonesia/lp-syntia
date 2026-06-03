@@ -110,6 +110,17 @@
   .hf{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:.86rem;font-weight:500;color:rgba(255,255,255,.92);text-align:center}
   .hf-ic{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:1.25rem}
 
+  /* Logo strip (marquee) */
+  .logos{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);overflow:hidden}
+  .logos .lbl{text-align:center;color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px}
+  .marquee{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}
+  .marquee-track{display:flex;align-items:center;gap:60px;flex-shrink:0;padding-right:60px;animation:scrollx 34s linear infinite;will-change:transform}
+  .logos:hover .marquee-track{animation-play-state:paused}
+  .logo-item{font-weight:800;font-size:1.3rem;color:var(--muted);white-space:nowrap;opacity:.7;letter-spacing:-.02em;transition:opacity .25s ease,color .25s ease}
+  .logo-item:hover{opacity:1;color:var(--ink)}
+  @keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
   /* Feature/Service grids */
   .grid{display:grid;gap:24px;margin-top:54px}
   .grid-3{grid-template-columns:repeat(3,1fr)}
@@ -233,7 +244,6 @@
   <div class="container nav">
     <a href="#beranda" class="brand" aria-label="Syntia by Syntegra">
       <img class="brand-logo" src="logo.png" alt="Syntia" />
-      <span class="pill">by Syntegra</span>
     </a>
     <nav>
       <ul class="nav-links">
@@ -271,6 +281,37 @@
         <div class="hf"><span class="hf-ic">📊</span> <span data-i18n="hf_2">Lebih Produktif</span></div>
         <div class="hf"><span class="hf-ic">🎯</span> <span data-i18n="hf_3">24/7 Siap Membantu</span></div>
         <div class="hf"><span class="hf-ic">🛡️</span> <span data-i18n="hf_4">Aman &amp; Terpercaya</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<section class="logos" aria-label="Ditenagai oleh">
+  <div class="container">
+    <p class="lbl" data-i18n="logos_label">Ditenagai oleh teknologi kelas dunia</p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="logo-item">GitHub</span>
+        <span class="logo-item">Xendit</span>
+        <span class="logo-item">Claude</span>
+        <span class="logo-item">Nano Banana</span>
+        <span class="logo-item">DeepInfra</span>
+        <span class="logo-item">ElevenLabs</span>
+        <span class="logo-item">FLUX</span>
+        <span class="logo-item">DeepSeek</span>
+        <span class="logo-item">ChatGPT</span>
+        <span class="logo-item">OpenAI</span>
+        <span class="logo-item" aria-hidden="true">GitHub</span>
+        <span class="logo-item" aria-hidden="true">Xendit</span>
+        <span class="logo-item" aria-hidden="true">Claude</span>
+        <span class="logo-item" aria-hidden="true">Nano Banana</span>
+        <span class="logo-item" aria-hidden="true">DeepInfra</span>
+        <span class="logo-item" aria-hidden="true">ElevenLabs</span>
+        <span class="logo-item" aria-hidden="true">FLUX</span>
+        <span class="logo-item" aria-hidden="true">DeepSeek</span>
+        <span class="logo-item" aria-hidden="true">ChatGPT</span>
+        <span class="logo-item" aria-hidden="true">OpenAI</span>
       </div>
     </div>
   </div>
@@ -476,6 +517,7 @@
       hero_lead:"Performa puncak 24/7, tanpa drama, tanpa jeda. Fokus pada visi Anda dan biarkan Syntia bekerja.",
       hero_cta:"Coba Gratis 14 Hari", hero_demo:"Lihat Demo",
       hf_1:"Hemat Waktu", hf_2:"Lebih Produktif", hf_3:"24/7 Siap Membantu", hf_4:"Aman &amp; Terpercaya",
+      logos_label:"Ditenagai oleh teknologi kelas dunia",
       fitur_eyebrow:"Fitur Utama",
       fitur_title:"Satu Asisten untuk <span class=\"grad-text\">Seluruh Hari Kerja Anda</span>",
       fitur_sub:"Dari membaca email hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami.",
@@ -553,6 +595,7 @@
       hero_lead:"Peak performance 24/7, no drama, no downtime. Focus on your vision and let Syntia work.",
       hero_cta:"Start 14-Day Free Trial", hero_demo:"Watch Demo",
       hf_1:"Save Time", hf_2:"More Productive", hf_3:"24/7 Ready to Help", hf_4:"Safe &amp; Trusted",
+      logos_label:"Powered by world-class technology",
       fitur_eyebrow:"Key Features",
       fitur_title:"One Assistant for <span class=\"grad-text\">Your Entire Workday</span>",
       fitur_sub:"From reading emails to taking meeting notes, Syntia does it all through natural voice conversation.",
