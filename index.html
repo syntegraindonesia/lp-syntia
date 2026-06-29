@@ -210,6 +210,13 @@
   .faq-item.open .faq-a{max-height:260px;padding-bottom:20px}
   .faq-item.open .chev{transform:rotate(45deg)}
 
+  /* WhatsApp floating button */
+  .wa-fab{position:fixed;right:22px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(37,211,102,.6);transition:transform .2s ease;animation:waPulse 2.6s ease-in-out infinite}
+  .wa-fab:hover{transform:scale(1.08)}
+  .wa-fab svg{width:30px;height:30px}
+  @keyframes waPulse{0%,100%{box-shadow:0 12px 28px -8px rgba(37,211,102,.55)}50%{box-shadow:0 14px 34px -6px rgba(37,211,102,.9)}}
+  @media(max-width:640px){.wa-fab{right:16px;bottom:16px;width:52px;height:52px}.wa-fab svg{width:27px;height:27px}}
+
   /* CTA */
   .cta{background:var(--grad);border-radius:28px;padding:64px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
   .cta h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}
@@ -774,5 +781,38 @@
     onScroll();
   })();
 </script>
+
+<!-- WhatsApp floating button -->
+<a class="wa-fab" href="https://wa.me/62818718388?text=Halo%20Syntia!%20Saya%20tertarik%20mencoba%20layanan%20Syntia." target="_blank" rel="noopener" aria-label="Chat via WhatsApp" title="Chat via WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 2.05.55 3.98 1.5 5.64L4.5 28l7.5-1.97a11 11 0 0 0 4.04.77h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4zm0 20.2c-1.27 0-2.51-.34-3.6-.98l-.26-.15-4.45 1.17 1.19-4.34-.17-.27a9.13 9.13 0 0 1-1.4-4.81c0-5.05 4.11-9.16 9.17-9.16 2.45 0 4.75.96 6.48 2.69a9.1 9.1 0 0 1 2.68 6.48c0 5.06-4.11 9.17-9.16 9.17zm5.03-6.86c-.28-.14-1.63-.8-1.88-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.16-.43-2.21-1.36-.82-.73-1.37-1.63-1.53-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01s-.49.07-.74.35c-.25.28-.97.95-.97 2.31s1 2.68 1.14 2.86c.14.18 1.96 3 4.75 4.21.66.29 1.18.46 1.58.59.66.21 1.27.18 1.74.11.53-.08 1.63-.67 1.86-1.31.23-.64.23-1.19.16-1.31-.07-.12-.25-.19-.53-.33z"/></svg>
+</a>
+
+<!--
+  ========================================================================
+  AI CHAT WIDGET — DISABLED (kept in code, not rendered)
+  Aktifkan nanti dengan: (1) uncomment blok HTML di bawah,
+  (2) sediakan endpoint backend AI (mis. /api/chat ke Claude API),
+  (3) sambungkan fungsi sendAIMessage() ke endpoint tersebut.
+  ------------------------------------------------------------------------
+  <div id="ai-chat-widget" class="ai-chat" hidden>
+    <button class="ai-fab" aria-label="Tanya Syntia AI">💬</button>
+    <div class="ai-panel" hidden>
+      <div class="ai-head">Syntia AI <button class="ai-close">×</button></div>
+      <div class="ai-log" id="aiLog"></div>
+      <form class="ai-input" id="aiForm">
+        <input type="text" id="aiText" placeholder="Tulis pesan…" autocomplete="off" />
+        <button type="submit">Kirim</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    // async function sendAIMessage(text){
+    //   const res = await fetch('/api/chat', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({message: text})});
+    //   const data = await res.json();
+    //   return data.reply;
+    // }
+  </script>
+  ========================================================================
+-->
 </body>
 </html>
