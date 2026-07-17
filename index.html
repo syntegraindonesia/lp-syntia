@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8" />
 <script>(function(){try{var t=localStorage.getItem('theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Syntia — Asisten AI Suara untuk UKM Indonesia</title>
-<meta name="description" content="Syntia adalah asisten AI berbasis suara dari PT Syntegra. Kelola email, jadwal, tugas, dan catatan bisnis Anda lewat perintah suara dalam Bahasa Indonesia & English." />
+<title>SynTask — Asisten AI Suara untuk UKM Indonesia</title>
+<meta name="description" content="SynTask adalah asisten AI berbasis suara dari PT Syntegra. Kelola email, jadwal, tugas, dan catatan bisnis Anda lewat perintah suara dalam Bahasa Indonesia & English." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -29,6 +29,11 @@
     --hero-grad:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#2563eb 100%);
     --shadow:0 10px 30px -12px rgba(37,99,235,.18);
     --radius:16px;
+    /* Orange — warna aksen dari logo SynTask (#F89618) untuk keharmonisan */
+    --orange:#F89618;
+    --orange-600:#ea7c0c;
+    --orange-grad:linear-gradient(135deg,#f97316 0%,#F89618 45%,#fbbf24 100%);
+    --orange-grad-r:linear-gradient(to right,#ea7c0c,#F89618,#fbbf24);
   }
   html[data-theme="dark"]{
     --ink:#e6eaf2;
@@ -47,21 +52,22 @@
   a{text-decoration:none;color:inherit}
   img{max-width:100%}
   .container{width:100%;max-width:1180px;margin:0 auto;padding:0 24px}
-  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .grad-text{background:var(--orange-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
   .section{padding:90px 0}
-  .eyebrow{display:inline-block;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--purple);margin-bottom:14px}
+  .eyebrow{display:inline-block;font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
   .section-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.15;letter-spacing:-.02em}
   .section-sub{color:var(--muted);font-size:1.05rem;max-width:640px;margin:16px auto 0}
   .center{text-align:center}
 
   /* Buttons */
   .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.98rem;padding:13px 26px;border-radius:12px;cursor:pointer;border:none;transition:transform .15s ease,box-shadow .2s ease,background .2s}
-  .btn-primary{background:var(--grad-r);color:#fff;box-shadow:0 8px 22px -8px rgba(37,99,235,.6)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(37,99,235,.65)}
+  /* CTA — semua orange sesuai logo SynTask untuk keharmonisan visual */
+  .btn-primary{background:var(--orange-grad-r);color:#fff;box-shadow:0 8px 22px -8px rgba(248,150,24,.55)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(248,150,24,.65)}
   .btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--purple);color:var(--purple)}
-  .btn-white{background:#fff;color:var(--blue-700);box-shadow:0 10px 24px -10px rgba(0,0,0,.35)}
-  .btn-white:hover{transform:translateY(-2px)}
+  .btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+  .btn-white{background:var(--orange);color:#fff;box-shadow:0 10px 24px -10px rgba(248,150,24,.55)}
+  .btn-white:hover{transform:translateY(-2px);background:var(--orange-600)}
   .btn-outline-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55)}
   .btn-outline-white:hover{background:rgba(255,255,255,.12)}
   .btn .play{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;font-size:.65rem}
@@ -69,12 +75,21 @@
   /* Navbar */
   header{position:fixed;top:0;left:0;right:0;z-index:50;background:transparent;border-bottom:1px solid transparent;transition:background .3s ease,box-shadow .3s ease,border-color .3s ease}
   header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);box-shadow:0 6px 24px -12px rgba(15,23,42,.22);border-bottom:1px solid var(--line)}
-  html[data-theme="dark"] header.scrolled{background:rgba(11,17,32,.9)}
+  /* Dark mode navbar scrolled: bg = "Syn" blue dari logo (#0C407A) untuk keharmonisan.
+     Logo pakai varian hero (Syn putih) supaya kontras di atas biru. */
+  html[data-theme="dark"] header.scrolled{background:#0C407A;border-bottom-color:rgba(255,255,255,.08)}
+  html[data-theme="dark"] header.scrolled .brand-logo{content:url(logo-syntask-hero.svg)}
+  html[data-theme="dark"] header.scrolled .nav-links a,html[data-theme="dark"] header.scrolled .nav-cta .login,html[data-theme="dark"] header.scrolled .menu-btn,html[data-theme="dark"] header.scrolled .icon-btn{color:#fff}
+  html[data-theme="dark"] header.scrolled .nav-links a:hover{color:var(--orange)}
+  html[data-theme="dark"] header.scrolled .icon-btn{border-color:rgba(255,255,255,.2)}
+  html[data-theme="dark"] header.scrolled .icon-btn:hover{background:rgba(255,255,255,.08)}
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{display:flex;align-items:center;gap:11px}
-  .brand-logo{height:38px;width:auto;display:block;filter:brightness(0) invert(1);transition:filter .3s ease}
-  header.scrolled .brand-logo{filter:none}
-  html[data-theme="dark"] header.scrolled .brand-logo{filter:brightness(0) invert(1)}
+  /* Logo navbar: berwarna asli di semua state; khusus di hero-top (navbar
+     transparan di atas hero navy), pakai varian yang wordmark "Syn"-nya
+     diputihkan supaya kontras — chip & "Task" tetap oranye. */
+  .brand-logo{height:38px;width:auto;display:block}
+  header:not(.scrolled) .brand-logo{content:url(logo-syntask-hero.svg)}
   .brand .pill{border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:3px 9px;font-size:.68rem;font-weight:600;letter-spacing:.02em;color:#fff;transition:color .3s ease,border-color .3s ease}
   .nav-links{display:flex;gap:34px;list-style:none}
   .nav-links a{color:rgba(255,255,255,.9);font-weight:500;font-size:.96rem;transition:color .15s}
@@ -92,7 +107,7 @@
   header.scrolled .menu-btn{color:var(--ink)}
   header.scrolled .icon-btn{color:var(--ink);border-color:var(--line)}
   header.scrolled .icon-btn:hover{background:var(--bg-soft)}
-  header.scrolled .nav-cta .btn-white{background:var(--grad-r);color:#fff;box-shadow:0 8px 20px -8px rgba(37,99,235,.5)}
+  header.scrolled .nav-cta .btn-white{background:var(--orange-grad-r);color:#fff;box-shadow:0 8px 20px -8px rgba(248,150,24,.5)}
   section[id]{scroll-margin-top:84px}
 
   /* Hero */
@@ -128,6 +143,25 @@
   /* Feature/Service grids */
   .grid{display:grid;gap:24px;margin-top:54px}
   .grid-3{grid-template-columns:repeat(3,1fr)}
+  /* Fitur = 3 baris carousel horizontal (5+5+6 kartu). Setiap baris menampilkan
+     3 kartu utama, sisanya di-slide via tombol prev/next atau scroll native. */
+  .fitur-carousel{position:relative;margin-top:24px}
+  .fitur-carousel:first-of-type{margin-top:54px}
+  /* NB: JANGAN pasang scroll-behavior:smooth di container yang juga pakai
+     scroll-snap-type mandatory — kombinasi ini bikin scrollLeft macet di 0
+     (snap re-anchor sebelum smooth scroll settle). scrollBy({behavior:"smooth"})
+     di JS tetap kasih animasi halus. */
+  .grid-fitur{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:4px 4px 12px}
+  .grid-fitur::-webkit-scrollbar{display:none}
+  .grid-fitur > .card{flex:0 0 calc((100% - 40px)/3);scroll-snap-align:start;padding:26px 22px;position:relative}
+  .new-badge{position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;font-size:10px;font-weight:800;letter-spacing:.06em;padding:3px 9px;border-radius:9999px;box-shadow:0 4px 10px -2px rgba(239,68,68,.5);z-index:1}
+  @media(max-width:1023px){.grid-fitur > .card{flex:0 0 calc((100% - 20px)/2)}}
+  @media(max-width:639px){.grid-fitur > .card{flex:0 0 88%}}
+  .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:9999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px -4px rgba(15,23,42,.18);transition:transform .2s ease,background .2s ease,opacity .2s ease}
+  .carousel-btn:hover{transform:translateY(-50%) scale(1.08);background:var(--bg)}
+  .carousel-btn.prev{left:-14px}
+  .carousel-btn.next{right:-14px}
+  @media(max-width:639px){.carousel-btn{display:none}}
   .grid-4{grid-template-columns:repeat(4,1fr)}
   .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s;text-align:left}
   .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px -18px rgba(37,99,235,.3);border-color:transparent}
@@ -160,8 +194,8 @@
   .plan .pdiv{height:1px;background:var(--line);margin:22px 0}
   .plan.featured .pdiv{background:rgba(255,255,255,.28)}
   .plan .btn{width:100%;justify-content:center}
-  .btn-dark{background:var(--ink);color:var(--page)}
-  .btn-dark:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px rgba(15,23,42,.5)}
+  .btn-dark{background:var(--orange);color:#fff}
+  .btn-dark:hover{transform:translateY(-2px);background:var(--orange-600);box-shadow:0 10px 24px -10px rgba(248,150,24,.5)}
   .plan .feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:22px}
   .plan .feat li{font-size:.93rem;color:var(--slate);line-height:1.4}
   .plan.featured .feat li{color:rgba(255,255,255,.94)}
@@ -221,15 +255,20 @@
   .cta{background:var(--grad);border-radius:28px;padding:64px 40px;text-align:center;color:#fff;position:relative;overflow:hidden}
   .cta h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800}
   .cta p{max-width:560px;margin:16px auto 30px;opacity:.92;font-size:1.08rem}
-  .cta .btn-cta{background:#fff;color:var(--blue-700)}
-  .cta .btn-cta:hover{transform:translateY(-2px)}
+  .cta .btn-cta{background:var(--orange);color:#fff;box-shadow:0 10px 24px -10px rgba(248,150,24,.55)}
+  .cta .btn-cta:hover{transform:translateY(-2px);background:var(--orange-600)}
 
   /* Footer */
   footer{border-top:1px solid var(--line);background:var(--surface);padding:40px 0}
+  /* Dark mode footer: bg = "Syn" blue (#0C407A) sama seperti navbar scrolled */
+  html[data-theme="dark"] footer{background:#0C407A;border-top-color:rgba(255,255,255,.08)}
+  html[data-theme="dark"] .foot-brandline,html[data-theme="dark"] .foot-copy{color:#fff}
+  html[data-theme="dark"] .foot-brandline .tag{color:rgba(255,255,255,.7)}
+  /* Dark mode footer logo: pakai varian hero (Syn putih) supaya kontras di bg biru */
+  html[data-theme="dark"] .foot-brandline img{content:url(logo-syntask-hero.svg)}
   .foot-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.9rem}
   .foot-brandline{display:flex;align-items:center;gap:12px;font-weight:600}
   .foot-brandline img{height:30px;width:auto;display:block}
-  html[data-theme="dark"] .foot-brandline img{filter:brightness(0) invert(1)}
   .foot-brandline .tag{color:#94a3b8;font-weight:400}
   .foot-copy{color:var(--muted)}
   @media(max-width:640px){
@@ -276,8 +315,8 @@
 <!-- NAVBAR -->
 <header>
   <div class="container nav">
-    <a href="#beranda" class="brand" aria-label="Syntia by Syntegra">
-      <img class="brand-logo" src="logo.png" alt="Syntia" />
+    <a href="#beranda" class="brand" aria-label="SynTask by Syntegra">
+      <img class="brand-logo" src="logo-syntask.svg" alt="SynTask" />
     </a>
     <nav>
       <ul class="nav-links">
@@ -292,7 +331,7 @@
       <button class="icon-btn" id="langBtn" aria-label="Ganti bahasa">EN</button>
       <button class="icon-btn" id="themeBtn" aria-label="Mode gelap">🌙</button>
       <a href="#" class="login" data-i18n="nav_login">Login</a>
-      <a href="#harga" class="btn btn-white" data-i18n="nav_cta">Coba Gratis</a>
+      <a href="https://www.syntia.syntegra.co.id/" target="_blank" rel="noreferrer noopener" class="btn btn-white" data-i18n="nav_cta">Coba Gratis</a>
       <button class="menu-btn" aria-label="Menu">☰</button>
     </div>
   </div>
@@ -300,14 +339,14 @@
 
 <!-- HERO -->
 <section class="hero" id="beranda">
-  <div class="hero-bg-wrap"><img src="hero.png" alt="Profesional santai menggunakan Syntia" /></div>
+  <div class="hero-bg-wrap"><img src="hero.png" alt="Profesional santai menggunakan SynTask" /></div>
   <div class="container">
     <div class="hero-copy">
-      <span class="badge" data-i18n="hero_badge">Asisten Virtual Syntia untuk Profesional Modern</span>
-      <h1 data-i18n="hero_h1">Syntia,<br />Asisten Pintar yang Urus Semuanya untuk Anda</h1>
-      <p class="lead" data-i18n="hero_lead">Performa puncak 24/7, tanpa drama, tanpa jeda. Fokus pada visi Anda dan biarkan Syntia bekerja.</p>
+      <span class="badge" data-i18n="hero_badge">SynTask — Asisten Virtual untuk Profesional Modern</span>
+      <h1 data-i18n="hero_h1">SynTask,<br />Asisten Pintar yang <span class="grad-text">Urus Semuanya</span> untuk Anda</h1>
+      <p class="lead" data-i18n="hero_lead">Bertemu Syntia — AI yang bekerja 24/7 di dalam SynTask. Tanpa drama, tanpa jeda. Fokus pada visi Anda, biarkan Syntia bekerja.</p>
       <div class="hero-photo-m">
-        <img src="hero.png" alt="Asisten AI Syntia" />
+        <img src="hero.png" alt="Asisten AI SynTask" />
         <div class="photo-feats">
           <div class="hf"><span class="hf-ic">⏱️</span> <span data-i18n="hf_1">Hemat Waktu</span></div>
           <div class="hf"><span class="hf-ic">📊</span> <span data-i18n="hf_2">Lebih Produktif</span></div>
@@ -316,8 +355,7 @@
         </div>
       </div>
       <div class="hero-actions">
-        <a href="#harga" class="btn btn-white" data-i18n="hero_cta">Coba Gratis 14 Hari</a>
-        <a href="#" class="btn btn-outline-white"><span class="play">▶</span> <span data-i18n="hero_demo">Lihat Demo</span></a>
+        <a href="https://www.syntia.syntegra.co.id/" target="_blank" rel="noreferrer noopener" class="btn btn-white" data-i18n="hero_cta">Coba Gratis 7 Hari</a>
       </div>
       <div class="hero-features">
         <div class="hf"><span class="hf-ic">⏱️</span> <span data-i18n="hf_1">Hemat Waktu</span></div>
@@ -365,18 +403,43 @@
   <div class="container center">
     <span class="eyebrow" data-i18n="fitur_eyebrow">Fitur Utama</span>
     <h2 class="section-title" data-i18n="fitur_title">Satu Asisten untuk <span class="grad-text">Seluruh Hari Kerja Anda</span></h2>
-    <p class="section-sub" data-i18n="fitur_sub">Dari membaca email hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami.</p>
+    <p class="section-sub" data-i18n="fitur_sub">Dari kalender &amp; pembukuan hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami di dalam SynTask.</p>
 
-    <div class="grid grid-3">
-      <div class="card"><div class="icon">🎙️</div><h3 data-i18n="f1_t">Percakapan Suara</h3><p data-i18n="f1_p">Bicara natural dalam Bahasa Indonesia atau English dengan kualitas suara setara native speaker.</p></div>
-      <div class="card"><div class="icon">✉️</div><h3 data-i18n="f2_t">Kelola Email</h3><p data-i18n="f2_p">Membaca, merangkum, dan mengirim email Anda hanya dengan perintah suara.</p></div>
-      <div class="card"><div class="icon">📅</div><h3 data-i18n="f3_t">Integrasi Kalender</h3><p data-i18n="f3_p">Atur jadwal dan buat janji temu tanpa perlu membuka aplikasi.</p></div>
-      <div class="card"><div class="icon">✅</div><h3 data-i18n="f4_t">Tugas &amp; Pengingat</h3><p data-i18n="f4_p">Lacak tugas dengan tenggat waktu agar tak ada yang terlewat.</p></div>
-      <div class="card"><div class="icon">📝</div><h3 data-i18n="f5_t">Rekam &amp; Rangkum Rapat</h3><p data-i18n="f5_p">Rekam rapat dan dapatkan ringkasan otomatis seketika.</p></div>
-      <div class="card"><div class="icon">🔊</div><h3 data-i18n="f6_t">Voice Notes</h3><p data-i18n="f6_p">Simpan dan temukan kembali catatan suara kapan saja Anda butuhkan.</p></div>
-      <div class="card"><div class="icon">🌅</div><h3 data-i18n="f7_t">Briefing Pagi</h3><p data-i18n="f7_p">Ringkasan agenda dan prioritas Anda otomatis terkirim setiap pukul 9 pagi.</p></div>
-      <div class="card"><div class="icon">🌙</div><h3 data-i18n="f8_t">Jurnal Malam</h3><p data-i18n="f8_p">Catatan refleksi harian lengkap dengan rangkuman mingguan.</p></div>
-      <div class="card"><div class="icon">🌐</div><h3 data-i18n="f9_t">Terjemahan Instan</h3><p data-i18n="f9_p">Terjemahkan antar bahasa secara langsung di tengah percakapan.</p></div>
+    <div class="fitur-carousel">
+      <button type="button" class="carousel-btn prev" aria-label="Sebelumnya">‹</button>
+      <div class="grid-fitur">
+        <div class="card"><div class="icon">🎙️</div><h3 data-i18n="f1_t">Percakapan Suara</h3><p data-i18n="f1_p">Bicara natural dalam Bahasa Indonesia atau English dengan kualitas suara setara native speaker.</p></div>
+        <div class="card"><div class="icon">📅</div><h3 data-i18n="f2_t">Kalender + Libur Nasional</h3><p data-i18n="f2_p">Atur jadwal, reminder, dan lihat semua libur nasional &amp; cuti bersama Indonesia langsung di kalender.</p></div>
+        <div class="card"><div class="icon">✅</div><h3 data-i18n="f3_t">Tugas &amp; Pengingat</h3><p data-i18n="f3_p">Lacak tugas dengan tenggat waktu agar tak ada yang terlewat.</p></div>
+        <div class="card"><div class="icon">🎤</div><h3 data-i18n="f4_t">Rekam &amp; Rangkum Rapat</h3><p data-i18n="f4_p">Rekam rapat dan dapatkan ringkasan otomatis seketika lengkap dengan mind map.</p></div>
+        <div class="card"><span class="new-badge">NEW</span><div class="icon">📝</div><h3 data-i18n="f5_t">Catatan Rich Text (WYSIWYG)</h3><p data-i18n="f5_p">Editor rich text: tap Bold, ketikan berikutnya langsung tebal. Folder, checklist, dictate suara, foto, dan pencarian pintar.</p></div>
+      </div>
+      <button type="button" class="carousel-btn next" aria-label="Selanjutnya">›</button>
+    </div>
+
+    <div class="fitur-carousel">
+      <button type="button" class="carousel-btn prev" aria-label="Sebelumnya">‹</button>
+      <div class="grid-fitur">
+        <div class="card"><div class="icon">🌅</div><h3 data-i18n="f6_t">Briefing Pagi + Horoskop</h3><p data-i18n="f6_p">Ringkasan agenda, prioritas, plus horoskop &amp; shio kamu otomatis terkirim setiap pukul 9 pagi.</p></div>
+        <div class="card"><div class="icon">🌙</div><h3 data-i18n="f7_t">Jurnal Malam</h3><p data-i18n="f7_p">Catatan refleksi harian lengkap dengan rangkuman mingguan.</p></div>
+        <div class="card"><div class="icon">🌐</div><h3 data-i18n="f8_t">Terjemahan Instan</h3><p data-i18n="f8_p">Terjemahkan antar bahasa secara langsung di tengah percakapan.</p></div>
+        <div class="card"><div class="icon">📊</div><h3 data-i18n="f9_t">Pembukuan Bisnis</h3><p data-i18n="f9_p">Catat pemasukan, pengeluaran, dan lihat laporan P&amp;L otomatis. Bahasa manusia, bukan akuntan.</p></div>
+        <div class="card"><div class="icon">📃</div><h3 data-i18n="f10_t">Dokumen Bisnis</h3><p data-i18n="f10_p">Bikin faktur, purchase order, dan quotation profesional lewat percakapan — langsung export PDF.</p></div>
+      </div>
+      <button type="button" class="carousel-btn next" aria-label="Selanjutnya">›</button>
+    </div>
+
+    <div class="fitur-carousel">
+      <button type="button" class="carousel-btn prev" aria-label="Sebelumnya">‹</button>
+      <div class="grid-fitur">
+        <div class="card"><span class="new-badge">NEW</span><div class="icon">🎯</div><h3 data-i18n="f11_t">Coaching + Foto Progres</h3><p data-i18n="f11_p">Coach yang nggak main-main — bikin target, check-in harian dengan foto progres, dan rayakan milestone dengan kartu shareable.</p></div>
+        <div class="card"><div class="icon">🖼️</div><h3 data-i18n="f12_t">Presentasi Otomatis</h3><p data-i18n="f12_p">Bikin slide deck (.pptx) dari brief singkat — Syntia yang susun struktur, konten, dan desainnya.</p></div>
+        <div class="card"><div class="icon">🔍</div><h3 data-i18n="f13_t">Insight Pribadi</h3><p data-i18n="f13_p">Advisor personal yang paham konteks kamu — kasih saran keputusan berdasarkan data &amp; memori Syntia.</p></div>
+        <div class="card"><div class="icon">🎨</div><h3 data-i18n="f14_t">AI Gambar</h3><p data-i18n="f14_p">Generate gambar dari deskripsi + analisis foto/gambar apa saja lewat percakapan.</p></div>
+        <div class="card"><span class="new-badge">NEW</span><div class="icon">📰</div><h3 data-i18n="f15_t">Pantauan Berita + Ringkasan AI</h3><p data-i18n="f15_p">Pantau topik bisnis yang penting buatmu. Syntia kirim push notification dengan ringkasan singkat + kenapa itu penting untuk bisnismu.</p></div>
+        <div class="card"><div class="icon">📵</div><h3 data-i18n="f16_t">Mode Offline</h3><p data-i18n="f16_p">Catatan, kalender, dan pembukuan tetap bisa dibuka &amp; dilihat saat sinyal hilang di pasar atau di kampung. Auto-sync begitu online.</p></div>
+      </div>
+      <button type="button" class="carousel-btn next" aria-label="Selanjutnya">›</button>
     </div>
   </div>
 </section>
@@ -389,8 +452,8 @@
     <p class="section-sub" data-i18n="alur_sub">Tanpa setup rumit—aktifkan, hubungkan, lalu cukup bicara.</p>
 
     <div class="grid grid-3">
-      <div class="card"><div class="icon">1️⃣</div><h3 data-i18n="a1_t">Aktifkan Akun</h3><p data-i18n="a1_p">Daftar dan mulai uji coba gratis 14 hari dengan kartu kredit.</p></div>
-      <div class="card"><div class="icon">2️⃣</div><h3 data-i18n="a2_t">Hubungkan Tools</h3><p data-i18n="a2_p">Sambungkan email &amp; kalender Anda dengan aman dalam hitungan menit.</p></div>
+      <div class="card"><div class="icon">1️⃣</div><h3 data-i18n="a1_t">Aktifkan Akun</h3><p data-i18n="a1_p">Daftar dan mulai uji coba gratis 7 hari — pilih metode pembayaran (kartu / OVO / GoPay / DANA), jaminan uang kembali 7 hari.</p></div>
+      <div class="card"><div class="icon">2️⃣</div><h3 data-i18n="a2_t">Hubungkan Tools</h3><p data-i18n="a2_p">Sambungkan kalender &amp; tools bisnis Anda dengan aman dalam hitungan menit.</p></div>
       <div class="card"><div class="icon">3️⃣</div><h3 data-i18n="a3_t">Bicara &amp; Beres</h3><p data-i18n="a3_p">Beri perintah lewat suara, Syntia yang menyelesaikan sisanya.</p></div>
     </div>
   </div>
@@ -401,7 +464,7 @@
   <div class="container center">
     <span class="eyebrow" data-i18n="us_eyebrow">Untuk Siapa</span>
     <h2 class="section-title" data-i18n="us_title">Dibuat untuk Cara Kerja <span class="grad-text">Orang Indonesia</span></h2>
-    <p class="section-sub" data-i18n="us_sub">Syntia hadir untuk mereka yang ingin bekerja lebih cepat tanpa repot mengetik.</p>
+    <p class="section-sub" data-i18n="us_sub">SynTask hadir untuk mereka yang ingin bekerja lebih cepat tanpa repot mengetik.</p>
 
     <div class="persona">
       <div class="card"><div class="icon">🏪</div><h3 data-i18n="p1_t">Pemilik UKM</h3><p data-i18n="p1_p">Urus administrasi dan komunikasi bisnis harian tanpa harus duduk lama di depan layar.</p></div>
@@ -415,7 +478,7 @@
 <section class="section alt-bg" id="keunggulan">
   <div class="container center">
     <span class="eyebrow" data-i18n="cmp_eyebrow">Perbandingan</span>
-    <h2 class="section-title" data-i18n="cmp_title">Syntia vs <span class="grad-text">Asisten Manusia</span></h2>
+    <h2 class="section-title" data-i18n="cmp_title">SynTask vs <span class="grad-text">Asisten Manusia</span></h2>
     <p class="section-sub" data-i18n="cmp_sub">Perbandingan jujur tanpa basa-basi.</p>
 
     <div class="compare-wrap">
@@ -424,11 +487,11 @@
           <tr>
             <th class="c-feat"></th>
             <th class="c-human" data-i18n="cmp_h_human">Asisten Manusia</th>
-            <th class="c-syntia" data-i18n="cmp_h_syntia">Syntia AI</th>
+            <th class="c-syntia" data-i18n="cmp_h_syntia">SynTask</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td class="c-feat" data-i18n="r1_f">Biaya / bulan</td><td class="c-human"><span data-i18n="r1_h">Rp 6–12 juta</span></td><td class="c-syntia"><span data-i18n="r1_s">Mulai Rp 288.000</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r1_f">Biaya / bulan</td><td class="c-human"><span class="x">✗</span><span data-i18n="r1_h">Rp 6–12 juta</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r1_s">Mulai Rp 149.000</span></td></tr>
           <tr><td class="c-feat" data-i18n="r2_f">Cuti sakit</td><td class="c-human"><span class="x">✗</span><span data-i18n="r2_h">Iya</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r2_s">Tidak pernah</span></td></tr>
           <tr><td class="c-feat" data-i18n="r3_f">Cuti melahirkan / keluarga</td><td class="c-human"><span class="x">✗</span><span data-i18n="r3_h">Iya</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r3_s">Tidak pernah</span></td></tr>
           <tr><td class="c-feat" data-i18n="r4_f">THR + bonus akhir tahun</td><td class="c-human"><span class="x">✗</span><span data-i18n="r4_h">Iya</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r4_s">Gak perlu</span></td></tr>
@@ -442,6 +505,11 @@
           <tr><td class="c-feat" data-i18n="r12_f">Risiko kerahasiaan</td><td class="c-human"><span class="warn">⚠️</span><span data-i18n="r12_h">Real (gosip, screenshot bocor)</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r12_s">Encrypted, gak ngobrol ke siapa-siapa</span></td></tr>
           <tr><td class="c-feat" data-i18n="r13_f">Drama pribadi</td><td class="c-human"><span class="x">✗</span><span data-i18n="r13_h">Iya</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r13_s">Bebas drama</span></td></tr>
           <tr><td class="c-feat" data-i18n="r14_f">Resign di waktu paling sibuk</td><td class="c-human"><span class="x">✗</span><span data-i18n="r14_h">Selalu pas Lebaran</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r14_s">Gak pernah resign</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r15_f">Pembukuan + laporan P&amp;L</td><td class="c-human"><span class="x">✗</span><span data-i18n="r15_h">Butuh akuntan tambahan</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r15_s">Otomatis, real-time</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r16_f">Bikin faktur / PO / quotation</td><td class="c-human"><span class="x">✗</span><span data-i18n="r16_h">Manual di Word/Excel</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r16_s">Percakapan → PDF siap kirim</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r17_f">Coach akuntabilitas 24/7</td><td class="c-human"><span class="x">✗</span><span data-i18n="r17_h">Nggak ada</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r17_s">Check-in harian + foto progres</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r18_f">Tetap jalan saat sinyal hilang</td><td class="c-human"><span class="x">✗</span><span data-i18n="r18_h">Nggak masuk kerja</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r18_s">Notes/Kalender/Pembukuan offline</span></td></tr>
+          <tr><td class="c-feat" data-i18n="r19_f">Berita bisnis yang relevan</td><td class="c-human"><span class="x">✗</span><span data-i18n="r19_h">Nggak ada</span></td><td class="c-syntia"><span class="ck">✓</span><span data-i18n="r19_s">Ringkasan AI + kenapa penting</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -453,7 +521,7 @@
   <div class="container center">
     <span class="eyebrow" data-i18n="harga_eyebrow">Harga</span>
     <h2 class="section-title" data-i18n="harga_title">Pilih Paket yang <span class="grad-text">Sesuai Kebutuhan</span></h2>
-    <p class="section-sub" data-i18n="harga_sub">Mulai gratis 14 hari dengan kartu kredit. Tambah kredit kapan saja saat Anda butuh.</p>
+    <p class="section-sub" data-i18n="harga_sub">Mulai gratis 7 hari — pilih metode pembayaran (kartu / OVO / GoPay / DANA), jaminan uang kembali 7 hari. Tambah kredit kapan saja saat Anda butuh.</p>
 
     <div class="pricing">
       <div class="plan">
@@ -466,20 +534,21 @@
         <span class="promo" data-i18n="promo">Promo Launching</span>
         <div class="credits"><b>500</b> 💎 <span data-i18n="kredit">kredit/bulan</span></div>
         <div class="pdiv"></div>
-        <a href="#kontak" class="btn btn-dark" data-i18n="trial_btn">Mulai trial gratis</a>
+        <a href="https://www.syntia.syntegra.co.id/" target="_blank" rel="noreferrer noopener" class="btn btn-dark" data-i18n="trial_btn">Mulai trial gratis</a>
         </div>
         <ul class="feat">
           <li data-i18n="b1">💬 Chat teks dengan Syntia</li>
-          <li data-i18n="b2">📅 Manajemen Kalender Google</li>
+          <li data-i18n="b2">📅 Kalender + libur nasional Indonesia</li>
           <li data-i18n="b3">🌅 Briefing pagi setiap hari</li>
           <li data-i18n="b4">🌙 Refleksi malam + rangkuman mingguan</li>
           <li data-i18n="b5">🔮 Horoskop &amp; shio harian</li>
-          <li data-i18n="b6">📰 Pemantauan berita (watchlist topik)</li>
+          <li data-i18n="b6">📰 Pantauan berita + ringkasan AI</li>
           <li data-i18n="b7">📄 Analisis dokumen (PDF, Word, Excel)</li>
           <li data-i18n="b8">🖼️ Analisis gambar + 🎨 generasi gambar AI</li>
           <li data-i18n="b9">🌐 Pencarian web &amp; berita</li>
-          <li data-i18n="b10">✅ To-do list &amp; catatan</li>
+          <li data-i18n="b10">✅ To-do list &amp; catatan rich text</li>
           <li data-i18n="b11">🧠 Memori CRM (orang, proyek, preferensi)</li>
+          <li data-i18n="b12">📵 Mode offline (Notes/Kalender/Pembukuan)</li>
         </ul>
       </div>
       <div class="plan featured">
@@ -492,13 +561,13 @@
         <span class="promo" data-i18n="promo">Promo Launching</span>
         <div class="credits"><b>1.500</b> 💎 <span data-i18n="kredit">kredit/bulan</span></div>
         <div class="pdiv"></div>
-        <a href="#kontak" class="btn btn-white" data-i18n="trial_btn">Mulai trial gratis</a>
+        <a href="https://www.syntia.syntegra.co.id/" target="_blank" rel="noreferrer noopener" class="btn btn-white" data-i18n="trial_btn">Mulai trial gratis</a>
         </div>
         <ul class="feat">
           <li data-i18n="pr1">✨ Semua fitur Basic, plus:</li>
           <li data-i18n="pr2">🎙️ Voice chat — bicara langsung ke Syntia</li>
           <li data-i18n="pr3">🔊 Balasan suara Syntia (TTS Bahasa fasih)</li>
-          <li data-i18n="pr4">📧 Integrasi Email Gmail (baca, draft, kirim)</li>
+          <li data-i18n="pr4">🎯 Coach + foto progres + kartu milestone shareable</li>
           <li data-i18n="pr5">🎤 Perekam rapat + ringkasan AI dengan mind map</li>
           <li data-i18n="pr6">🌍 Penerjemah real-time (16+ bahasa)</li>
           <li data-i18n="pr7">💎 3× lebih banyak kredit untuk pemakaian intensif</li>
@@ -520,14 +589,16 @@
   <div class="container center">
     <span class="eyebrow" data-i18n="faq_eyebrow">FAQ</span>
     <h2 class="section-title" data-i18n="faq_title">Pertanyaan yang <span class="grad-text">Sering Diajukan</span></h2>
-    <p class="section-sub" data-i18n="faq_sub">Temukan jawaban untuk pertanyaan umum tentang Syntia.</p>
+    <p class="section-sub" data-i18n="faq_sub">Temukan jawaban untuk pertanyaan umum tentang SynTask.</p>
 
     <div class="faq">
-      <div class="faq-item"><button class="faq-q"><span data-i18n="q1">Apa itu Syntia?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a1">Syntia adalah asisten AI berbasis suara dari PT Syntegra, dirancang khusus untuk UKM dan profesional bilingual Indonesia agar dapat mengelola tugas bisnis lewat perintah suara.</p></div></div>
-      <div class="faq-item"><button class="faq-q"><span data-i18n="q2">Bahasa apa saja yang didukung?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a2">Syntia mendukung Bahasa Indonesia dan English dengan kualitas suara setara native speaker, dan bisa berpindah bahasa di tengah percakapan.</p></div></div>
-      <div class="faq-item"><button class="faq-q"><span data-i18n="q3">Apakah ada uji coba gratis?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a3">Ya. Anda bisa mencoba Syntia gratis selama 14 hari dengan kartu kredit.</p></div></div>
-      <div class="faq-item"><button class="faq-q"><span data-i18n="q4">Bagaimana sistem kreditnya?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a4">Paket Basic memberi 500 kredit/bulan dan Professional 1.500 kredit/bulan. Jika kurang, Anda dapat menambah kredit lewat top-up kapan saja.</p></div></div>
-      <div class="faq-item"><button class="faq-q"><span data-i18n="q5">Kapan Syntia tersedia untuk umum?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a5">Saat ini Syntia berada dalam tahap closed beta. Peluncuran publik ditargetkan pada Q3/Q4 2026.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q1">Apa itu SynTask?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a1">SynTask adalah asisten AI berbasis suara buatan PT Syntegra untuk UKM &amp; profesional Indonesia. Di dalamnya ada Syntia — AI yang mengurus email, kalender, pengingat, rapat, catatan, briefing harian, hingga terjemahan cukup lewat suara dalam Bahasa Indonesia atau English. Jalan sebagai Progressive Web App, tanpa install.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q2">Berapa harga SynTask?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a2">Ada 2 paket promo launching: Basic Rp 149.000/bulan (500 kredit) dan Professional Rp 349.000/bulan (1.500 kredit). Butuh lebih? Top-up mulai Rp 49.000. Semua paket dapat uji coba gratis 7 hari, pembayaran via Midtrans (kartu / OVO / GoPay / DANA).</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q3">Apa bedanya SynTask dengan Siri, Google Assistant, atau Alexa?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a3">SynTask dirancang khusus untuk Indonesia. Siri, Google Assistant, atau Alexa mengerti Bahasa Indonesia tapi berbicara dengan aksen Inggris — sedangkan Syntia punya TTS Bahasa yang natural, paham konteks lokal (zodiak, shio, kalender Jawa, ritme bisnis Indonesia), plus workflow yang pas untuk UKM. Syntia juga ingat orang, proyek, dan preferensi Anda lintas percakapan.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q4">Apa saja yang bisa dilakukan SynTask?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a4">Baca &amp; tulis email lewat Gmail, atur jadwal Google Calendar, pengingat &amp; to-do suara, rekam rapat + ringkasan otomatis, catatan rich text, briefing pagi + horoskop, jurnal malam, terjemahan real-time, pantauan berita, generasi gambar AI, hingga mengingat konteks orang &amp; proyek Anda.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q5">Apakah SynTask bisa dipakai di iPhone?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a5">Bisa. SynTask jalan di browser mobile modern sebagai Progressive Web App — termasuk Safari di iPhone. Tambahkan ke home screen supaya terasa seperti aplikasi native. App Android native ditargetkan mid-2026, iOS menyusul.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q6">Apakah data saya aman?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a6">Ya. SynTask pakai OAuth 2.0 resmi dari Google untuk akses email &amp; kalender — bukan password. Semua koneksi dienkripsi HTTPS. Data tersimpan di Postgres terenkripsi, hosted di Indonesia/Asia Tenggara. Anda bisa cabut akses Google atau hapus akun beserta seluruh data kapan saja lewat satu klik.</p></div></div>
+      <div class="faq-item"><button class="faq-q"><span data-i18n="q7">Bisa merekam &amp; merangkum rapat?</span><span class="chev">+</span></button><div class="faq-a"><p data-i18n="a7">Bisa. Tap tombol perekam rapat di SynTask, taruh HP di meja, dan Syntia akan transkrip real-time. Setelah rapat, dapat ringkasan terstruktur berisi keputusan, action items, dan follow-up — dalam Bahasa Indonesia atau English. Wake Lock menjaga layar tetap nyala selama rapat.</p></div></div>
     </div>
   </div>
 </section>
@@ -536,9 +607,9 @@
 <section class="section" style="padding-top:30px" id="kontak">
   <div class="container">
     <div class="cta">
-      <h2 data-i18n="cta_h2">Siap Bekerja Lebih Cepat dengan Suara?</h2>
-      <p data-i18n="cta_p">Coba Syntia gratis selama 14 hari dengan kartu kredit, tanpa ribet—cukup bicara.</p>
-      <a href="#" class="btn btn-cta" data-i18n="cta_btn">Mulai Uji Coba Gratis →</a>
+      <h2 data-i18n="cta_h2">Siap Bekerja <span class="grad-text">Lebih Cepat</span> dengan Suara?</h2>
+      <p data-i18n="cta_p">Coba SynTask gratis 7 hari. Tanpa ribet—cukup bicara.</p>
+      <a href="https://www.syntia.syntegra.co.id/" target="_blank" rel="noreferrer noopener" class="btn btn-cta" data-i18n="cta_btn">Mulai Uji Coba Gratis →</a>
     </div>
   </div>
 </section>
@@ -547,7 +618,7 @@
 <footer>
   <div class="container foot-row">
     <div class="foot-brandline">
-      <img src="logo.png" alt="Syntia" />
+      <img src="logo-syntask.svg" alt="SynTask" />
       <span class="tag" data-i18n="foot_tag">· Bagian dari ekosistem Syntegra.</span>
     </div>
     <p class="foot-copy" data-i18n="foot_copy">© 2026 Syntegra. Semua hak dilindungi.</p>
@@ -559,41 +630,48 @@
   var I18N = {
     id: {
       nav_fitur:"Fitur", nav_alur:"Alur Kerja", nav_banding:"Perbandingan", nav_harga:"Harga", nav_faq:"FAQ", nav_login:"Login", nav_cta:"Coba Gratis",
-      hero_badge:"Asisten Virtual Syntia untuk Profesional Modern",
-      hero_h1:"Syntia,<br />Asisten Pintar yang Urus Semuanya untuk Anda",
-      hero_lead:"Performa puncak 24/7, tanpa drama, tanpa jeda. Fokus pada visi Anda dan biarkan Syntia bekerja.",
-      hero_cta:"Coba Gratis 14 Hari", hero_demo:"Lihat Demo",
+      hero_badge:"SynTask — Asisten Virtual untuk Profesional Modern",
+      hero_h1:"SynTask,<br />Asisten Pintar yang <span class=\"grad-text\">Urus Semuanya</span> untuk Anda",
+      hero_lead:"Bertemu Syntia — AI yang bekerja 24/7 di dalam SynTask. Tanpa drama, tanpa jeda. Fokus pada visi Anda, biarkan Syntia bekerja.",
+      hero_cta:"Coba Gratis 7 Hari", hero_demo:"Lihat Demo",
       hf_1:"Hemat Waktu", hf_2:"Lebih Produktif", hf_3:"24/7 Siap Membantu", hf_4:"Aman &amp; Terpercaya",
       logos_label:"Ditenagai oleh teknologi kelas dunia",
       fitur_eyebrow:"Fitur Utama",
       fitur_title:"Satu Asisten untuk <span class=\"grad-text\">Seluruh Hari Kerja Anda</span>",
-      fitur_sub:"Dari membaca email hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami.",
+      fitur_sub:"Dari kalender &amp; pembukuan hingga mencatat rapat, Syntia mengerjakannya lewat percakapan suara yang alami di dalam SynTask.",
       f1_t:"Percakapan Suara", f1_p:"Bicara natural dalam Bahasa Indonesia atau English dengan kualitas suara setara native speaker.",
-      f2_t:"Kelola Email", f2_p:"Membaca, merangkum, dan mengirim email Anda hanya dengan perintah suara.",
-      f3_t:"Integrasi Kalender", f3_p:"Atur jadwal dan buat janji temu tanpa perlu membuka aplikasi.",
-      f4_t:"Tugas &amp; Pengingat", f4_p:"Lacak tugas dengan tenggat waktu agar tak ada yang terlewat.",
-      f5_t:"Rekam &amp; Rangkum Rapat", f5_p:"Rekam rapat dan dapatkan ringkasan otomatis seketika.",
-      f6_t:"Voice Notes", f6_p:"Simpan dan temukan kembali catatan suara kapan saja Anda butuhkan.",
-      f7_t:"Briefing Pagi", f7_p:"Ringkasan agenda dan prioritas Anda otomatis terkirim setiap pukul 9 pagi.",
-      f8_t:"Jurnal Malam", f8_p:"Catatan refleksi harian lengkap dengan rangkuman mingguan.",
-      f9_t:"Terjemahan Instan", f9_p:"Terjemahkan antar bahasa secara langsung di tengah percakapan.",
+      f2_t:"Kalender + Libur Nasional", f2_p:"Atur jadwal, reminder, dan lihat semua libur nasional &amp; cuti bersama Indonesia langsung di kalender.",
+      f3_t:"Tugas &amp; Pengingat", f3_p:"Lacak tugas dengan tenggat waktu agar tak ada yang terlewat.",
+      f4_t:"Rekam &amp; Rangkum Rapat", f4_p:"Rekam rapat dan dapatkan ringkasan otomatis seketika lengkap dengan mind map.",
+      f5_t:"Catatan Rich Text (WYSIWYG)", f5_p:"Editor rich text: tap Bold, ketikan berikutnya langsung tebal. Folder, checklist, dictate suara, foto, dan pencarian pintar.",
+      f6_t:"Briefing Pagi + Horoskop", f6_p:"Ringkasan agenda, prioritas, plus horoskop &amp; shio kamu otomatis terkirim setiap pukul 9 pagi.",
+      f7_t:"Jurnal Malam", f7_p:"Catatan refleksi harian lengkap dengan rangkuman mingguan.",
+      f8_t:"Terjemahan Instan", f8_p:"Terjemahkan antar bahasa secara langsung di tengah percakapan.",
+      f9_t:"Pembukuan Bisnis", f9_p:"Catat pemasukan, pengeluaran, dan lihat laporan P&amp;L otomatis. Bahasa manusia, bukan akuntan.",
+      f10_t:"Dokumen Bisnis", f10_p:"Bikin faktur, purchase order, dan quotation profesional lewat percakapan — langsung export PDF.",
+      f11_t:"Coaching + Foto Progres", f11_p:"Coach yang nggak main-main — bikin target, check-in harian dengan foto progres, dan rayakan milestone dengan kartu shareable.",
+      f12_t:"Presentasi Otomatis", f12_p:"Bikin slide deck (.pptx) dari brief singkat — Syntia yang susun struktur, konten, dan desainnya.",
+      f13_t:"Insight Pribadi", f13_p:"Advisor personal yang paham konteks kamu — kasih saran keputusan berdasarkan data &amp; memori Syntia.",
+      f14_t:"AI Gambar", f14_p:"Generate gambar dari deskripsi + analisis foto/gambar apa saja lewat percakapan.",
+      f15_t:"Pantauan Berita + Ringkasan AI", f15_p:"Pantau topik bisnis yang penting buatmu. Syntia kirim push notification dengan ringkasan singkat + kenapa itu penting untuk bisnismu.",
+      f16_t:"Mode Offline", f16_p:"Catatan, kalender, dan pembukuan tetap bisa dibuka &amp; dilihat saat sinyal hilang di pasar atau di kampung. Auto-sync begitu online.",
       alur_eyebrow:"Alur Kerja",
       alur_title:"Mulai dalam <span class=\"grad-text\">Tiga Langkah Mudah</span>",
       alur_sub:"Tanpa setup rumit—aktifkan, hubungkan, lalu cukup bicara.",
-      a1_t:"Aktifkan Akun", a1_p:"Daftar dan mulai uji coba gratis 14 hari dengan kartu kredit.",
-      a2_t:"Hubungkan Tools", a2_p:"Sambungkan email &amp; kalender Anda dengan aman dalam hitungan menit.",
+      a1_t:"Aktifkan Akun", a1_p:"Daftar dan mulai uji coba gratis 7 hari — pilih metode pembayaran (kartu / OVO / GoPay / DANA), jaminan uang kembali 7 hari.",
+      a2_t:"Hubungkan Tools", a2_p:"Sambungkan kalender &amp; tools bisnis Anda dengan aman dalam hitungan menit.",
       a3_t:"Bicara &amp; Beres", a3_p:"Beri perintah lewat suara, Syntia yang menyelesaikan sisanya.",
       us_eyebrow:"Untuk Siapa",
       us_title:"Dibuat untuk Cara Kerja <span class=\"grad-text\">Orang Indonesia</span>",
-      us_sub:"Syntia hadir untuk mereka yang ingin bekerja lebih cepat tanpa repot mengetik.",
+      us_sub:"SynTask hadir untuk mereka yang ingin bekerja lebih cepat tanpa repot mengetik.",
       p1_t:"Pemilik UKM", p1_p:"Urus administrasi dan komunikasi bisnis harian tanpa harus duduk lama di depan layar.",
       p2_t:"Profesional Bilingual", p2_p:"Berpindah mulus antara Bahasa Indonesia dan English sepanjang hari kerja Anda.",
       p3_t:"Pecinta Suara", p3_p:"Untuk Anda yang lebih suka berbicara daripada mengetik untuk menyelesaikan tugas.",
       cmp_eyebrow:"Perbandingan",
-      cmp_title:"Syntia vs <span class=\"grad-text\">Asisten Manusia</span>",
+      cmp_title:"SynTask vs <span class=\"grad-text\">Asisten Manusia</span>",
       cmp_sub:"Perbandingan jujur tanpa basa-basi.",
-      cmp_h_human:"Asisten Manusia", cmp_h_syntia:"Syntia AI",
-      r1_f:"Biaya / bulan", r1_h:"Rp 6–12 juta", r1_s:"Mulai Rp 288.000",
+      cmp_h_human:"Asisten Manusia", cmp_h_syntia:"SynTask",
+      r1_f:"Biaya / bulan", r1_h:"Rp 6–12 juta", r1_s:"Mulai Rp 149.000",
       r2_f:"Cuti sakit", r2_h:"Iya", r2_s:"Tidak pernah",
       r3_f:"Cuti melahirkan / keluarga", r3_h:"Iya", r3_s:"Tidak pernah",
       r4_f:"THR + bonus akhir tahun", r4_h:"Iya", r4_s:"Gak perlu",
@@ -607,71 +685,85 @@
       r12_f:"Risiko kerahasiaan", r12_h:"Real (gosip, screenshot bocor)", r12_s:"Encrypted, gak ngobrol ke siapa-siapa",
       r13_f:"Drama pribadi", r13_h:"Iya", r13_s:"Bebas drama",
       r14_f:"Resign di waktu paling sibuk", r14_h:"Selalu pas Lebaran", r14_s:"Gak pernah resign",
+      r15_f:"Pembukuan + laporan P&amp;L", r15_h:"Butuh akuntan tambahan", r15_s:"Otomatis, real-time",
+      r16_f:"Bikin faktur / PO / quotation", r16_h:"Manual di Word/Excel", r16_s:"Percakapan → PDF siap kirim",
+      r17_f:"Coach akuntabilitas 24/7", r17_h:"Nggak ada", r17_s:"Check-in harian + foto progres",
+      r18_f:"Tetap jalan saat sinyal hilang", r18_h:"Nggak masuk kerja", r18_s:"Notes/Kalender/Pembukuan offline",
+      r19_f:"Berita bisnis yang relevan", r19_h:"Nggak ada", r19_s:"Ringkasan AI + kenapa penting",
       harga_eyebrow:"Harga",
       harga_title:"Pilih Paket yang <span class=\"grad-text\">Sesuai Kebutuhan</span>",
-      harga_sub:"Mulai gratis 14 hari dengan kartu kredit. Tambah kredit kapan saja saat Anda butuh.",
+      harga_sub:"Mulai gratis 7 hari — pilih metode pembayaran (kartu / OVO / GoPay / DANA), jaminan uang kembali 7 hari. Tambah kredit kapan saja saat Anda butuh.",
       plan_basic_label:"Untuk Individu", plan_basic_name:"Basic",
       per:"/bulan", kredit:"kredit/bulan", trial_btn:"Mulai trial gratis", promo:"Promo Launching",
-      b1:"💬 Chat teks dengan Syntia", b2:"📅 Manajemen Kalender Google", b3:"🌅 Briefing pagi setiap hari",
-      b4:"🌙 Refleksi malam + rangkuman mingguan", b5:"🔮 Horoskop &amp; shio harian", b6:"📰 Pemantauan berita (watchlist topik)",
+      b1:"💬 Chat teks dengan Syntia", b2:"📅 Kalender + libur nasional Indonesia", b3:"🌅 Briefing pagi setiap hari",
+      b4:"🌙 Refleksi malam + rangkuman mingguan", b5:"🔮 Horoskop &amp; shio harian", b6:"📰 Pantauan berita + ringkasan AI",
       b7:"📄 Analisis dokumen (PDF, Word, Excel)", b8:"🖼️ Analisis gambar + 🎨 generasi gambar AI", b9:"🌐 Pencarian web &amp; berita",
-      b10:"✅ To-do list &amp; catatan", b11:"🧠 Memori CRM (orang, proyek, preferensi)",
+      b10:"✅ To-do list &amp; catatan rich text", b11:"🧠 Memori CRM (orang, proyek, preferensi)", b12:"📵 Mode offline (Notes/Kalender/Pembukuan)",
       plan_pro_label:"Paling Populer ⭐", plan_pro_name:"Professional",
       pr1:"✨ Semua fitur Basic, plus:", pr2:"🎙️ Voice chat — bicara langsung ke Syntia", pr3:"🔊 Balasan suara Syntia (TTS Bahasa fasih)",
-      pr4:"📧 Integrasi Email Gmail (baca, draft, kirim)", pr5:"🎤 Perekam rapat + ringkasan AI dengan mind map", pr6:"🌍 Penerjemah real-time (16+ bahasa)",
+      pr4:"🎯 Coach + foto progres + kartu milestone shareable", pr5:"🎤 Perekam rapat + ringkasan AI dengan mind map", pr6:"🌍 Penerjemah real-time (16+ bahasa)",
       pr7:"💎 3× lebih banyak kredit untuk pemakaian intensif",
       topup_text:"Butuh kredit tambahan? Top-up kapan saja.",
       tu1:"Paket kredit kecil", tu2:"Paket kredit menengah", tu3:"Paket kredit besar",
       faq_eyebrow:"FAQ",
       faq_title:"Pertanyaan yang <span class=\"grad-text\">Sering Diajukan</span>",
-      faq_sub:"Temukan jawaban untuk pertanyaan umum tentang Syntia.",
-      q1:"Apa itu Syntia?", a1:"Syntia adalah asisten AI berbasis suara dari PT Syntegra, dirancang khusus untuk UKM dan profesional bilingual Indonesia agar dapat mengelola tugas bisnis lewat perintah suara.",
-      q2:"Bahasa apa saja yang didukung?", a2:"Syntia mendukung Bahasa Indonesia dan English dengan kualitas suara setara native speaker, dan bisa berpindah bahasa di tengah percakapan.",
-      q3:"Apakah ada uji coba gratis?", a3:"Ya. Anda bisa mencoba Syntia gratis selama 14 hari dengan kartu kredit.",
-      q4:"Bagaimana sistem kreditnya?", a4:"Paket Basic memberi 500 kredit/bulan dan Professional 1.500 kredit/bulan. Jika kurang, Anda dapat menambah kredit lewat top-up kapan saja.",
-      q5:"Kapan Syntia tersedia untuk umum?", a5:"Saat ini Syntia berada dalam tahap closed beta. Peluncuran publik ditargetkan pada Q3/Q4 2026.",
-      cta_h2:"Siap Bekerja Lebih Cepat dengan Suara?",
-      cta_p:"Coba Syntia gratis selama 14 hari dengan kartu kredit, tanpa ribet—cukup bicara.",
+      faq_sub:"Temukan jawaban untuk pertanyaan umum tentang SynTask.",
+      q1:"Apa itu SynTask?", a1:"SynTask adalah asisten AI berbasis suara buatan PT Syntegra untuk UKM &amp; profesional Indonesia. Di dalamnya ada Syntia — AI yang mengurus email, kalender, pengingat, rapat, catatan, briefing harian, hingga terjemahan cukup lewat suara dalam Bahasa Indonesia atau English. Jalan sebagai Progressive Web App, tanpa install.",
+      q2:"Berapa harga SynTask?", a2:"Ada 2 paket promo launching: Basic Rp 149.000/bulan (500 kredit) dan Professional Rp 349.000/bulan (1.500 kredit). Butuh lebih? Top-up mulai Rp 49.000. Semua paket dapat uji coba gratis 7 hari, pembayaran via Midtrans (kartu / OVO / GoPay / DANA).",
+      q3:"Apa bedanya SynTask dengan Siri, Google Assistant, atau Alexa?", a3:"SynTask dirancang khusus untuk Indonesia. Siri, Google Assistant, atau Alexa mengerti Bahasa Indonesia tapi berbicara dengan aksen Inggris — sedangkan Syntia punya TTS Bahasa yang natural, paham konteks lokal (zodiak, shio, kalender Jawa, ritme bisnis Indonesia), plus workflow yang pas untuk UKM. Syntia juga ingat orang, proyek, dan preferensi Anda lintas percakapan.",
+      q4:"Apa saja yang bisa dilakukan SynTask?", a4:"Baca &amp; tulis email lewat Gmail, atur jadwal Google Calendar, pengingat &amp; to-do suara, rekam rapat + ringkasan otomatis, catatan rich text, briefing pagi + horoskop, jurnal malam, terjemahan real-time, pantauan berita, generasi gambar AI, hingga mengingat konteks orang &amp; proyek Anda.",
+      q5:"Apakah SynTask bisa dipakai di iPhone?", a5:"Bisa. SynTask jalan di browser mobile modern sebagai Progressive Web App — termasuk Safari di iPhone. Tambahkan ke home screen supaya terasa seperti aplikasi native. App Android native ditargetkan mid-2026, iOS menyusul.",
+      q6:"Apakah data saya aman?", a6:"Ya. SynTask pakai OAuth 2.0 resmi dari Google untuk akses email &amp; kalender — bukan password. Semua koneksi dienkripsi HTTPS. Data tersimpan di Postgres terenkripsi, hosted di Indonesia/Asia Tenggara. Anda bisa cabut akses Google atau hapus akun beserta seluruh data kapan saja lewat satu klik.",
+      q7:"Bisa merekam &amp; merangkum rapat?", a7:"Bisa. Tap tombol perekam rapat di SynTask, taruh HP di meja, dan Syntia akan transkrip real-time. Setelah rapat, dapat ringkasan terstruktur berisi keputusan, action items, dan follow-up — dalam Bahasa Indonesia atau English. Wake Lock menjaga layar tetap nyala selama rapat.",
+      cta_h2:"Siap Bekerja <span class=\"grad-text\">Lebih Cepat</span> dengan Suara?",
+      cta_p:"Coba SynTask gratis 7 hari. Tanpa ribet—cukup bicara.",
       cta_btn:"Mulai Uji Coba Gratis →",
       foot_tag:"· Bagian dari ekosistem Syntegra.", foot_copy:"© 2026 Syntegra. Semua hak dilindungi."
     },
     en: {
       nav_fitur:"Features", nav_alur:"How It Works", nav_banding:"Comparison", nav_harga:"Pricing", nav_faq:"FAQ", nav_login:"Login", nav_cta:"Try Free",
-      hero_badge:"Syntia Virtual Assistant for Modern Professionals",
-      hero_h1:"Syntia,<br />the Smart Assistant That Handles Everything for You",
-      hero_lead:"Peak performance 24/7, no drama, no downtime. Focus on your vision and let Syntia work.",
-      hero_cta:"Start 14-Day Free Trial", hero_demo:"Watch Demo",
+      hero_badge:"SynTask — Virtual Assistant for Modern Professionals",
+      hero_h1:"SynTask,<br />the Smart Assistant That <span class=\"grad-text\">Handles Everything</span> for You",
+      hero_lead:"Meet Syntia — the AI working 24/7 inside SynTask. No drama, no downtime. Focus on your vision, let Syntia work.",
+      hero_cta:"Start 7-Day Free Trial", hero_demo:"Watch Demo",
       hf_1:"Save Time", hf_2:"More Productive", hf_3:"24/7 Ready to Help", hf_4:"Safe &amp; Trusted",
       logos_label:"Powered by world-class technology",
       fitur_eyebrow:"Key Features",
       fitur_title:"One Assistant for <span class=\"grad-text\">Your Entire Workday</span>",
-      fitur_sub:"From reading emails to taking meeting notes, Syntia does it all through natural voice conversation.",
+      fitur_sub:"From calendar &amp; bookkeeping to taking meeting notes, Syntia does it all through natural voice conversation inside SynTask.",
       f1_t:"Voice Conversation", f1_p:"Speak naturally in Indonesian or English with native-quality voice.",
-      f2_t:"Email Management", f2_p:"Read, summarize, and send your emails with simple voice commands.",
-      f3_t:"Calendar Integration", f3_p:"Manage your schedule and set appointments without opening an app.",
-      f4_t:"Tasks &amp; Reminders", f4_p:"Track tasks with due dates so nothing slips through.",
-      f5_t:"Record &amp; Summarize Meetings", f5_p:"Record meetings and get automatic summaries instantly.",
-      f6_t:"Voice Notes", f6_p:"Save and retrieve voice notes whenever you need them.",
-      f7_t:"Morning Briefing", f7_p:"A summary of your agenda and priorities delivered automatically at 9 AM.",
-      f8_t:"Evening Journal", f8_p:"Daily reflection notes complete with weekly summaries.",
-      f9_t:"Instant Translation", f9_p:"Translate between languages instantly, mid-conversation.",
+      f2_t:"Calendar + National Holidays", f2_p:"Manage schedules, reminders, and see all Indonesian national holidays &amp; collective leave right in your calendar.",
+      f3_t:"Tasks &amp; Reminders", f3_p:"Track tasks with due dates so nothing slips through.",
+      f4_t:"Record &amp; Summarize Meetings", f4_p:"Record meetings and get instant automatic summaries, complete with mind maps.",
+      f5_t:"Rich Text Notes (WYSIWYG)", f5_p:"Rich text editor: tap Bold, next keystroke is bold. Folders, checklists, voice dictation, photos, and smart search.",
+      f6_t:"Morning Briefing + Horoscope", f6_p:"Agenda summary, priorities, plus your horoscope &amp; zodiac auto-delivered every 9 AM.",
+      f7_t:"Evening Journal", f7_p:"Daily reflection notes complete with weekly summaries.",
+      f8_t:"Instant Translation", f8_p:"Translate between languages instantly, mid-conversation.",
+      f9_t:"Business Bookkeeping", f9_p:"Track income, expenses, and see automatic P&amp;L reports. Plain language, not accountant-speak.",
+      f10_t:"Business Documents", f10_p:"Create invoices, purchase orders, and professional quotations via conversation — export straight to PDF.",
+      f11_t:"Coaching + Progress Photos", f11_p:"A coach that means business — set goals, daily check-ins with progress photos, and celebrate milestones with shareable cards.",
+      f12_t:"Automatic Presentations", f12_p:"Create slide decks (.pptx) from a short brief — Syntia handles the structure, content, and design.",
+      f13_t:"Personal Insights", f13_p:"A personal advisor that understands your context — decision guidance based on your data &amp; Syntia's memory.",
+      f14_t:"AI Images", f14_p:"Generate images from descriptions + analyze any photo/image through conversation.",
+      f15_t:"News Watch + AI Summary", f15_p:"Watch business topics that matter to you. Syntia sends push notifications with short summaries + why it matters to your business.",
+      f16_t:"Offline Mode", f16_p:"Notes, calendar, and bookkeeping remain accessible when signal drops at the market or in the village. Auto-sync when back online.",
       alur_eyebrow:"How It Works",
       alur_title:"Get Started in <span class=\"grad-text\">Three Easy Steps</span>",
       alur_sub:"No complex setup—activate, connect, then just talk.",
-      a1_t:"Activate Account", a1_p:"Sign up and start your 14-day free trial with a credit card.",
-      a2_t:"Connect Your Tools", a2_p:"Securely connect your email &amp; calendar in minutes.",
+      a1_t:"Activate Account", a1_p:"Sign up and start your 7-day free trial — pick a payment method (card / OVO / GoPay / DANA), 7-day money-back guarantee.",
+      a2_t:"Connect Your Tools", a2_p:"Securely connect your calendar &amp; business tools in minutes.",
       a3_t:"Talk &amp; Done", a3_p:"Give voice commands and Syntia handles the rest.",
       us_eyebrow:"Who It's For",
       us_title:"Built for the Way <span class=\"grad-text\">Indonesians Work</span>",
-      us_sub:"Syntia is for those who want to work faster without the hassle of typing.",
+      us_sub:"SynTask is for those who want to work faster without the hassle of typing.",
       p1_t:"SME Owners", p1_p:"Handle daily admin and business communication without sitting at a screen for hours.",
       p2_t:"Bilingual Professionals", p2_p:"Switch seamlessly between Indonesian and English throughout your workday.",
       p3_t:"Voice Lovers", p3_p:"For those who prefer speaking over typing to get things done.",
       cmp_eyebrow:"Comparison",
-      cmp_title:"Syntia vs <span class=\"grad-text\">a Human Assistant</span>",
+      cmp_title:"SynTask vs <span class=\"grad-text\">a Human Assistant</span>",
       cmp_sub:"An honest comparison, no fluff.",
-      cmp_h_human:"Human Assistant", cmp_h_syntia:"Syntia AI",
-      r1_f:"Cost / month", r1_h:"Rp 6–12 million", r1_s:"From Rp 288,000",
+      cmp_h_human:"Human Assistant", cmp_h_syntia:"SynTask",
+      r1_f:"Cost / month", r1_h:"Rp 6–12 million", r1_s:"From Rp 149,000",
       r2_f:"Sick leave", r2_h:"Yes", r2_s:"Never",
       r3_f:"Maternity / family leave", r3_h:"Yes", r3_s:"Never",
       r4_f:"Holiday &amp; year-end bonus", r4_h:"Yes", r4_s:"Not needed",
@@ -685,31 +777,38 @@
       r12_f:"Confidentiality risk", r12_h:"Real (gossip, leaked screenshots)", r12_s:"Encrypted, never gossips",
       r13_f:"Personal drama", r13_h:"Yes", r13_s:"Drama-free",
       r14_f:"Quits at the busiest time", r14_h:"Always around the holidays", r14_s:"Never quits",
+      r15_f:"Bookkeeping + P&amp;L reports", r15_h:"Needs an additional accountant", r15_s:"Automatic, real-time",
+      r16_f:"Create invoices / POs / quotations", r16_h:"Manual in Word/Excel", r16_s:"Conversation → ready-to-send PDF",
+      r17_f:"24/7 accountability coach", r17_h:"Nope", r17_s:"Daily check-ins + progress photos",
+      r18_f:"Keeps running when signal drops", r18_h:"Won't come to work", r18_s:"Notes/Calendar/Bookkeeping offline",
+      r19_f:"Relevant business news", r19_h:"Nope", r19_s:"AI summaries + why it matters",
       harga_eyebrow:"Pricing",
       harga_title:"Choose the Plan That <span class=\"grad-text\">Fits You</span>",
-      harga_sub:"Start free for 14 days with a credit card. Top up credits anytime you need.",
+      harga_sub:"Start free for 7 days — pick a payment method (card / OVO / GoPay / DANA), 7-day money-back guarantee. Top up credits anytime you need.",
       plan_basic_label:"For Individuals", plan_basic_name:"Basic",
       per:"/month", kredit:"credits/month", trial_btn:"Start free trial", promo:"Launch Promo",
-      b1:"💬 Text chat with Syntia", b2:"📅 Google Calendar management", b3:"🌅 Daily morning briefing",
-      b4:"🌙 Evening reflection + weekly summary", b5:"🔮 Daily horoscope &amp; zodiac", b6:"📰 News monitoring (topic watchlist)",
+      b1:"💬 Text chat with Syntia", b2:"📅 Calendar + Indonesian national holidays", b3:"🌅 Daily morning briefing",
+      b4:"🌙 Evening reflection + weekly summary", b5:"🔮 Daily horoscope &amp; zodiac", b6:"📰 News watch + AI summary",
       b7:"📄 Document analysis (PDF, Word, Excel)", b8:"🖼️ Image analysis + 🎨 AI image generation", b9:"🌐 Web &amp; news search",
-      b10:"✅ To-do list &amp; notes", b11:"🧠 CRM memory (people, projects, preferences)",
+      b10:"✅ To-do list &amp; rich text notes", b11:"🧠 CRM memory (people, projects, preferences)", b12:"📵 Offline mode (Notes/Calendar/Bookkeeping)",
       plan_pro_label:"Most Popular ⭐", plan_pro_name:"Professional",
       pr1:"✨ Everything in Basic, plus:", pr2:"🎙️ Voice chat — talk directly to Syntia", pr3:"🔊 Syntia voice replies (fluent TTS)",
-      pr4:"📧 Gmail integration (read, draft, send)", pr5:"🎤 Meeting recorder + AI summary with mind map", pr6:"🌍 Real-time translator (16+ languages)",
+      pr4:"🎯 Coach + progress photos + shareable milestone cards", pr5:"🎤 Meeting recorder + AI summary with mind map", pr6:"🌍 Real-time translator (16+ languages)",
       pr7:"💎 3× more credits for heavy usage",
       topup_text:"Need more credits? Top up anytime.",
       tu1:"Small credit pack", tu2:"Medium credit pack", tu3:"Large credit pack",
       faq_eyebrow:"FAQ",
       faq_title:"Frequently <span class=\"grad-text\">Asked Questions</span>",
-      faq_sub:"Find answers to common questions about Syntia.",
-      q1:"What is Syntia?", a1:"Syntia is a voice-based AI assistant from PT Syntegra, designed for Indonesian SMEs and bilingual professionals to manage business tasks via voice commands.",
-      q2:"Which languages are supported?", a2:"Syntia supports Indonesian and English with native-quality voice, and can switch languages mid-conversation.",
-      q3:"Is there a free trial?", a3:"Yes. You can try Syntia free for 14 days with a credit card.",
-      q4:"How does the credit system work?", a4:"The Basic plan gives 500 credits/month and Professional 1,500 credits/month. If you need more, you can top up anytime.",
-      q5:"When will Syntia be publicly available?", a5:"Syntia is currently in closed beta. Public launch is targeted for Q3/Q4 2026.",
-      cta_h2:"Ready to Work Faster with Your Voice?",
-      cta_p:"Try Syntia free for 14 days with a credit card, no hassle—just talk.",
+      faq_sub:"Find answers to common questions about SynTask.",
+      q1:"What is SynTask?", a1:"SynTask is a voice-first AI assistant built by PT Syntegra for Indonesian SMBs &amp; professionals. Inside lives Syntia — the AI that handles email, calendar, reminders, meetings, notes, daily briefings, and translations, all via voice in Bahasa Indonesia or English. Runs as a Progressive Web App, no install needed.",
+      q2:"How much does SynTask cost?", a2:"Two launch-promo plans: Basic at Rp 149,000/month (500 credits) and Professional at Rp 349,000/month (1,500 credits). Need more? Top-ups start at Rp 49,000. All plans include a 7-day free trial, payment via Midtrans (card / OVO / GoPay / DANA).",
+      q3:"How is SynTask different from Siri, Google Assistant, or Alexa?", a3:"SynTask is built specifically for Indonesia. Siri, Google Assistant, and Alexa understand Indonesian but speak it with an English accent — Syntia has native-sounding Bahasa TTS, understands local context (zodiacs, Javanese calendar, Indonesian business rhythms), plus workflows tailored for SMBs. Syntia also remembers people, projects, and preferences across conversations.",
+      q4:"What can SynTask do?", a4:"Read &amp; write email via Gmail, manage Google Calendar, voice reminders &amp; to-dos, record meetings + automatic summaries, rich text notes, morning briefing + horoscope, evening journal, real-time translation, news watch, AI image generation, and remembering context about your people &amp; projects.",
+      q5:"Is SynTask available on iPhone?", a5:"Yes. SynTask runs in modern mobile browsers as a Progressive Web App — including Safari on iPhone. Add it to your home screen for an app-like experience. A native Android app is targeted for mid-2026; iOS to follow.",
+      q6:"Is my data secure?", a6:"Yes. SynTask uses Google's official OAuth 2.0 for email &amp; calendar access — no passwords. All connections are HTTPS-encrypted. Data is stored in encrypted Postgres, hosted in Indonesia/Southeast Asia. You can revoke Google access or delete your account and all data anytime with a single click.",
+      q7:"Can it record &amp; summarize meetings?", a7:"Yes. Tap the meeting recorder in SynTask, place your phone on the table, and Syntia transcribes in real time. After the meeting, get a structured summary with decisions, action items, and follow-ups — in Bahasa Indonesia or English. Wake Lock keeps the screen on throughout.",
+      cta_h2:"Ready to Work <span class=\"grad-text\">Faster</span> with Your Voice?",
+      cta_p:"Try SynTask free for 7 days. No hassle—just talk.",
       cta_btn:"Start Free Trial →",
       foot_tag:"· Part of the Syntegra ecosystem.", foot_copy:"© 2026 Syntegra. All rights reserved."
     }
@@ -782,10 +881,9 @@
   })();
 </script>
 
-<!-- WhatsApp floating button -->
-<a class="wa-fab" href="https://wa.me/62818718388?text=Halo%20Syntia!%20Saya%20tertarik%20mencoba%20layanan%20Syntia." target="_blank" rel="noopener" aria-label="Chat via WhatsApp" title="Chat via WhatsApp">
-  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.04 4C9.96 4 5.02 8.94 5.02 15.02c0 2.05.55 3.98 1.5 5.64L4.5 28l7.5-1.97a11 11 0 0 0 4.04.77h.01c6.08 0 11.02-4.94 11.02-11.02C27.07 8.94 22.12 4 16.04 4zm0 20.2c-1.27 0-2.51-.34-3.6-.98l-.26-.15-4.45 1.17 1.19-4.34-.17-.27a9.13 9.13 0 0 1-1.4-4.81c0-5.05 4.11-9.16 9.17-9.16 2.45 0 4.75.96 6.48 2.69a9.1 9.1 0 0 1 2.68 6.48c0 5.06-4.11 9.17-9.16 9.17zm5.03-6.86c-.28-.14-1.63-.8-1.88-.9-.25-.09-.43-.14-.62.14-.18.28-.71.9-.87 1.08-.16.18-.32.2-.6.07-.28-.14-1.16-.43-2.21-1.36-.82-.73-1.37-1.63-1.53-1.91-.16-.28-.02-.43.12-.57.13-.13.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.49-.07-.14-.62-1.5-.85-2.05-.22-.53-.45-.46-.62-.47-.16-.01-.35-.01-.53-.01s-.49.07-.74.35c-.25.28-.97.95-.97 2.31s1 2.68 1.14 2.86c.14.18 1.96 3 4.75 4.21.66.29 1.18.46 1.58.59.66.21 1.27.18 1.74.11.53-.08 1.63-.67 1.86-1.31.23-.64.23-1.19.16-1.31-.07-.12-.25-.19-.53-.33z"/></svg>
-</a>
+<!-- WhatsApp floating button — DIHAPUS: digantikan widget chatbot Syntia (syntia-widget.js)
+     agar tidak menumpuk di pojok kanan bawah. Eskalasi ke WhatsApp kini via chatbot. -->
+
 
 <!--
   ========================================================================
@@ -795,9 +893,9 @@
   (3) sambungkan fungsi sendAIMessage() ke endpoint tersebut.
   ------------------------------------------------------------------------
   <div id="ai-chat-widget" class="ai-chat" hidden>
-    <button class="ai-fab" aria-label="Tanya Syntia AI">💬</button>
+    <button class="ai-fab" aria-label="Tanya SynTask AI">💬</button>
     <div class="ai-panel" hidden>
-      <div class="ai-head">Syntia AI <button class="ai-close">×</button></div>
+      <div class="ai-head">SynTask AI <button class="ai-close">×</button></div>
       <div class="ai-log" id="aiLog"></div>
       <form class="ai-input" id="aiForm">
         <input type="text" id="aiText" placeholder="Tulis pesan…" autocomplete="off" />
@@ -814,5 +912,97 @@
   </script>
   ========================================================================
 -->
+
+<script>
+/* Carousel fitur — 3 baris independen, tiap tombol scroll track masing-masing
+   sejauh 1 kartu (offsetWidth + gap 20px). Tombol fade saat batas start/end. */
+(function(){
+  function initCarousel(root){
+    var track=root.querySelector('.grid-fitur');
+    var prev=root.querySelector('.carousel-btn.prev');
+    var next=root.querySelector('.carousel-btn.next');
+    if(!track||!prev||!next) return;
+    function step(){var c=track.querySelector('.card');return c?c.offsetWidth+20:300;}
+    prev.addEventListener('click',function(){track.scrollBy({left:-step()});});
+    next.addEventListener('click',function(){track.scrollBy({left:step()});});
+    function updateBtns(){
+      var atStart=track.scrollLeft<=1;
+      var atEnd=track.scrollLeft+track.clientWidth>=track.scrollWidth-1;
+      prev.style.opacity=atStart?'0.35':'1';
+      prev.style.pointerEvents=atStart?'none':'auto';
+      next.style.opacity=atEnd?'0.35':'1';
+      next.style.pointerEvents=atEnd?'none':'auto';
+    }
+    track.addEventListener('scroll',updateBtns,{passive:true});
+    window.addEventListener('resize',updateBtns);
+    updateBtns();
+  }
+  function init(){document.querySelectorAll('.fitur-carousel').forEach(initCarousel);}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+(function(){
+  function synHomeLabel(){ return 'Syntegra'; }
+  var synLangObs=false;
+  function synWatchLang(){ if(synLangObs) return; synLangObs=true; try{ new MutationObserver(function(){ document.querySelectorAll('[data-syn-home]').forEach(function(a){ a.textContent = synHomeLabel(); }); }).observe(document.documentElement, {attributes:true, attributeFilter:['lang']}); }catch(e){} }
+  function enhance(){
+    synWatchLang();
+    try{
+      var nav = document.querySelector('header nav') || document.querySelector('nav');
+      if(nav && !nav.querySelector('[data-syn-home]')){
+        var ref = nav.querySelector('a');
+        var refLi = ref ? ref.closest('li') : null;
+        var home = document.createElement('a');
+        home.textContent = synHomeLabel();
+        home.href = '/';
+        home.setAttribute('data-syn-home','1');
+        // Copy sibling link's class so Home matches color/spacing per page.
+        if(ref) home.className = ref.className;
+        if(refLi && refLi.parentNode){
+          // list-based nav (ul>li>a): mirror the <li> and insert INTO the <ul>.
+          var li = document.createElement('li');
+          if(refLi.className) li.className = refLi.className;
+          li.appendChild(home);
+          refLi.parentNode.appendChild(li);
+        } else if(ref && ref.parentNode){
+          // flat nav (nav>a): insert before the first link.
+          ref.parentNode.appendChild(home);
+        } else {
+          nav.appendChild(home);
+        }
+      }
+    }catch(e){}
+    try{
+      var footer = document.querySelector('footer');
+      if(!footer) return;
+      var walker = document.createTreeWalker(footer, NodeFilter.SHOW_TEXT, null);
+      var nodes=[], n;
+      while(n = walker.nextNode()){
+        var p = n.parentNode;
+        if(n.nodeValue && n.nodeValue.indexOf('Syntegra')>=0 && !(p && p.getAttribute && p.getAttribute('data-syn-foot'))) nodes.push(n);
+      }
+      nodes.forEach(function(tn){
+        var parts = tn.nodeValue.split('Syntegra');
+        if(parts.length<2) return;
+        var frag = document.createDocumentFragment();
+        for(var i=0;i<parts.length;i++){
+          if(i>0){
+            var a=document.createElement('a');
+            a.href='/'; a.textContent='Syntegra';
+            a.setAttribute('data-syn-foot','1');
+            a.style.color='inherit'; a.style.textDecoration='underline';
+            frag.appendChild(a);
+          }
+          if(parts[i]) frag.appendChild(document.createTextNode(parts[i]));
+        }
+        tn.parentNode.replaceChild(frag, tn);
+      });
+    }catch(e){}
+  }
+  window.addEventListener('load', function(){ enhance(); setTimeout(enhance,400); setTimeout(enhance,1200); });
+  if(document.readyState==='complete') enhance();
+})();
+</script>
+<script defer src="syntia-widget.js"></script>
 </body>
 </html>
+
